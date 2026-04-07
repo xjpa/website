@@ -26,6 +26,7 @@ const entry: LifemaxxEntry = {
 
     <h2>weights training</h2>
     <p>i lift weights at home, thus i keep this workout simple.</p>
+    <p><big>routine 1: full body</big></p>
     <p>3 days a week, alternating between day A and day B, thus it looks like:</p>
     <ul>
       <li>week 1: A, B, A</li>
@@ -60,7 +61,7 @@ const entry: LifemaxxEntry = {
       <li>farm carries</li>
       <li>skater bounds 8x8</li>
     </ul>
-
+    <big>routine 2: push/pull/legs</big>
     <h2>you need to get jacked</h2>
     <p>on the day of writing this post, paul graham, published an essay called brand age. and with it, it made me think about the importance of marketing in the AI era.</p>
     <p>skill alone is no longer the threshold when information is cheap and automated knowledge workers (AI agents) makes output hard to differentiate.</p>
