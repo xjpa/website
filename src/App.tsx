@@ -28,6 +28,14 @@ type RenderedHtmlContent = {
   headings: BlogHeading[];
 };
 
+function resolvePublicAssetPath(path: string) {
+  if (!path.startsWith('/')) {
+    return path;
+  }
+
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+}
+
 function useDocumentTitle(pageTitle?: string) {
   useEffect(() => {
     document.title = pageTitle ? `${pageTitle} | ${site.name}` : site.name;
@@ -195,7 +203,7 @@ function BlogIndex() {
               <Link to={`/blog/${post.slug}`}>{post.title}</Link>
             </h2>
             {post.coverImage ? (
-              <img className="post-cover" src={post.coverImage} alt={post.title} />
+              <img className="post-cover" src={resolvePublicAssetPath(post.coverImage)} alt={post.title} />
             ) : null}
             <p>{post.summary}</p>
             <div className="tag-row">
@@ -448,7 +456,7 @@ function BlogPostPage() {
       </Link>
       <p className="post-date">{formatDate(post.date)}</p>
       <h1>{post.title}</h1>
-      {post.coverImage ? <img className="post-hero" src={post.coverImage} alt={post.title} /> : null}
+      {post.coverImage ? <img className="post-hero" src={resolvePublicAssetPath(post.coverImage)} alt={post.title} /> : null}
       <p className="about-copy">{post.summary}</p>
       <div className="tag-row">
         {post.tags.map((tag) => (
@@ -551,6 +559,13 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
     if (/^https?:\/\//.test(href)) {
       anchor.setAttribute('target', '_blank');
       anchor.setAttribute('rel', 'noreferrer');
+    }
+  });
+
+  document.querySelectorAll('img[src], source[src], video[src]').forEach((element) => {
+    const src = element.getAttribute('src') ?? '';
+    if (src.startsWith('/')) {
+      element.setAttribute('src', resolvePublicAssetPath(src));
     }
   });
 
