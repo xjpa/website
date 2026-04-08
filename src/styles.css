@@ -600,6 +600,22 @@ a {
 .table-of-contents ol {
   margin: 0;
   padding-left: 1.4rem;
+  counter-reset: toc-item;
+  list-style: none;
+}
+
+.table-of-contents li {
+  counter-increment: toc-item;
+}
+
+.table-of-contents li::marker {
+  content: '';
+}
+
+.table-of-contents li::before {
+  content: counters(toc-item, '.') '. ';
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .table-of-contents a {
@@ -629,6 +645,10 @@ a {
   background: var(--article-toc-bg);
 }
 
+.post-layout .table-of-contents li::before {
+  color: var(--article-link);
+}
+
 .post-layout .post-body blockquote {
   border-left-color: rgba(31, 79, 184, 0.28);
   background: rgba(31, 79, 184, 0.045);
@@ -639,8 +659,8 @@ a {
   margin-top: 8px;
 }
 
-.post-layout .table-of-contents .toc-level-3 {
-  margin-left: 16px;
+.post-layout .table-of-contents li > ol {
+  margin-top: 8px;
 }
 
 .post-body h2,

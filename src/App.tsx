@@ -20,7 +20,8 @@ type TagFilter = {
 type BlogHeading = {
   id: string;
   text: string;
-  level: 2 | 3;
+  level: 2 | 3 | 4 | 5;
+  children: BlogHeading[];
 };
 
 type RenderedHtmlContent = {
@@ -326,16 +327,10 @@ function LifemaxxEntryPage() {
           </span>
         ))}
       </div>
-      {renderedEntry && renderedEntry.headings.length > 1 ? (
+      {renderedEntry && countHeadings(renderedEntry.headings) > 1 ? (
         <nav className="table-of-contents" aria-label="Table of contents">
           <p className="toc-title">Contents</p>
-          <ol>
-            {renderedEntry.headings.map((heading) => (
-              <li className={`toc-level-${heading.level}`} key={heading.id}>
-                <Link to={`/lifemaxx/${entry.slug}?section=${heading.id}`}>{heading.text}</Link>
-              </li>
-            ))}
-          </ol>
+          <TableOfContents headings={renderedEntry.headings} basePath={`/lifemaxx/${entry.slug}`} />
         </nav>
       ) : null}
       {renderedEntry ? (
@@ -387,16 +382,10 @@ function ProjectPage() {
       <p className="post-date">Project</p>
       <h1>{project.title}</h1>
       <p className="about-copy">{project.summary}</p>
-      {renderedProject && renderedProject.headings.length > 1 ? (
+      {renderedProject && countHeadings(renderedProject.headings) > 1 ? (
         <nav className="table-of-contents" aria-label="Table of contents">
           <p className="toc-title">Contents</p>
-          <ol>
-            {renderedProject.headings.map((heading) => (
-              <li className={`toc-level-${heading.level}`} key={heading.id}>
-                <Link to={`/projects/${project.slug}?section=${heading.id}`}>{heading.text}</Link>
-              </li>
-            ))}
-          </ol>
+          <TableOfContents headings={renderedProject.headings} basePath={`/projects/${project.slug}`} />
         </nav>
       ) : null}
       {renderedProject ? (
@@ -465,16 +454,10 @@ function BlogPostPage() {
           </span>
         ))}
       </div>
-      {renderedPost && renderedPost.headings.length > 1 ? (
+      {renderedPost && countHeadings(renderedPost.headings) > 1 ? (
         <nav className="table-of-contents" aria-label="Table of contents">
           <p className="toc-title">Contents</p>
-          <ol>
-            {renderedPost.headings.map((heading) => (
-              <li className={`toc-level-${heading.level}`} key={heading.id}>
-                <Link to={`/blog/${post.slug}?section=${heading.id}`}>{heading.text}</Link>
-              </li>
-            ))}
-          </ol>
+          <TableOfContents headings={renderedPost.headings} basePath={`/blog/${post.slug}`} />
         </nav>
       ) : null}
       {renderedPost ? <div className="post-body post-body-html" dangerouslySetInnerHTML={{ __html: renderedPost.html }} /> : null}
@@ -536,9 +519,9 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
   const document = new DOMParser().parseFromString(content, 'text/html');
   const slugCounts = new Map<string, number>();
   const headings: BlogHeading[] = [];
+  const headingStack: BlogHeading[] = [];
 
-  document.querySelectorAll('h2, h3').forEach((heading) => {
-    const level = heading.tagName === 'H3' ? 3 : 2;
+  document.querySelectorAll('h2, h3, h4, h5').forEach((heading) => {
     const text = heading.textContent?.trim() ?? '';
 
     if (!text) {
@@ -550,7 +533,21 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
     const id = currentCount === 0 ? baseId : `${baseId}-${currentCount + 1}`;
     slugCounts.set(baseId, currentCount + 1);
     heading.id = id;
-    headings.push({ id, text, level });
+
+    const level = Number(heading.tagName.slice(1)) as BlogHeading['level'];
+    const tocHeading: BlogHeading = { id, text, level, children: [] };
+
+    while (headingStack.length > 0 && headingStack[headingStack.length - 1].level >= level) {
+      headingStack.pop();
+    }
+
+    if (headingStack.length === 0) {
+      headings.push(tocHeading);
+    } else {
+      headingStack[headingStack.length - 1].children.push(tocHeading);
+    }
+
+    headingStack.push(tocHeading);
   });
 
   document.querySelectorAll('a[href]').forEach((anchor) => {
@@ -596,6 +593,25 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
     html: document.body.innerHTML,
     headings,
   };
+}
+
+function TableOfContents({ headings, basePath }: { headings: BlogHeading[]; basePath: string }) {
+  return (
+    <ol>
+      {headings.map((heading) => (
+        <li key={heading.id}>
+          <Link to={`${basePath}?section=${heading.id}`}>{heading.text}</Link>
+          {heading.children.length > 0 ? (
+            <TableOfContents headings={heading.children} basePath={basePath} />
+          ) : null}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function countHeadings(headings: BlogHeading[]): number {
+  return headings.reduce((total, heading) => total + 1 + countHeadings(heading.children), 0);
 }
 
 function renderHighlightedCodeHtml(code: string, language: string) {
