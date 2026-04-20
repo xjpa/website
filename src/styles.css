@@ -558,9 +558,14 @@ a {
 
 .post-body ul,
 .post-body ol {
-  max-width: 700px;
-  padding-left: 1.4rem;
+  max-width: calc(700px - 1.2rem);
+  margin-left: 1.2rem;
+  padding-left: 1.25rem;
   color: var(--text);
+}
+
+.post-body li {
+  padding-left: 0.15rem;
 }
 
 .post-body blockquote {
@@ -600,20 +605,15 @@ a {
 .table-of-contents ol {
   margin: 0;
   padding-left: 1.4rem;
-  counter-reset: toc-item;
   list-style: none;
-}
-
-.table-of-contents li {
-  counter-increment: toc-item;
 }
 
 .table-of-contents li::marker {
   content: '';
 }
 
-.table-of-contents li::before {
-  content: counters(toc-item, '.') '. ';
+.toc-number,
+.heading-number {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
@@ -645,7 +645,8 @@ a {
   background: var(--article-toc-bg);
 }
 
-.post-layout .table-of-contents li::before {
+.post-layout .toc-number,
+.post-layout .heading-number {
   color: var(--article-link);
 }
 
@@ -664,7 +665,9 @@ a {
 }
 
 .post-body h2,
-.post-body h3 {
+.post-body h3,
+.post-body h4,
+.post-body h5 {
   max-width: 700px;
   scroll-margin-top: 100px;
 }
@@ -673,6 +676,12 @@ a {
   margin-top: 28px;
   margin-bottom: 12px;
   font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+.post-body h4,
+.post-body h5 {
+  margin-top: 22px;
+  margin-bottom: 10px;
 }
 
 .post-body-html>* {

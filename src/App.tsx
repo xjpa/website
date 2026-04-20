@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import portraitOne from '../slide1.jpg';
-import portraitTwo from '../slide2.jpg';
-import portraitThree from '../slide3.jpg';
+import portraitOne from './assets/slide1.jpg';
+import portraitTwo from './assets/slide2.jpg';
+import portraitThree from './assets/slide3.jpg';
 import { highlightCode } from './codeHighlight';
 import { lifemaxxEntries } from './lifemaxx';
 import type { LifemaxxEntry } from './lifemaxx';
@@ -20,6 +20,7 @@ type TagFilter = {
 type BlogHeading = {
   id: string;
   text: string;
+  number: string;
   level: 2 | 3 | 4 | 5;
   children: BlogHeading[];
 };
@@ -173,7 +174,7 @@ function BlogIndex() {
         <p className="eyebrow">Blog</p>
         <h1>Notes on AI, security, and systems.</h1>
         <p className="about-copy">
-          personal tech skillmaxxing protocols
+          full stack from math to systems
         </p>
       </div>
 
@@ -252,8 +253,8 @@ function LifemaxxIndex() {
     <section className="blog-layout">
       <div className="section-heading">
         <p className="eyebrow">Lifemaxx</p>
-        <h1>Discipline, systems, and performance notes.</h1>
-        <p className="about-copy">A separate feed for routines, self-management, and high-agency living.</p>
+        <h1>Protocols for high-agency living</h1>
+        <p className="about-copy">performance optimization for business, life, school</p>
       </div>
 
       <div className="posts-grid">
@@ -535,16 +536,24 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
     heading.id = id;
 
     const level = Number(heading.tagName.slice(1)) as BlogHeading['level'];
-    const tocHeading: BlogHeading = { id, text, level, children: [] };
 
     while (headingStack.length > 0 && headingStack[headingStack.length - 1].level >= level) {
       headingStack.pop();
     }
 
+    const parentHeading = headingStack[headingStack.length - 1];
+    const siblingIndex = parentHeading ? parentHeading.children.length + 1 : headings.length + 1;
+    const number = parentHeading ? `${parentHeading.number}.${siblingIndex}` : `${siblingIndex}`;
+    const tocHeading: BlogHeading = { id, text, number, level, children: [] };
+    const headingNumber = document.createElement('span');
+    headingNumber.className = 'heading-number';
+    headingNumber.textContent = `${number}. `;
+    heading.prepend(headingNumber);
+
     if (headingStack.length === 0) {
       headings.push(tocHeading);
     } else {
-      headingStack[headingStack.length - 1].children.push(tocHeading);
+      parentHeading.children.push(tocHeading);
     }
 
     headingStack.push(tocHeading);
@@ -600,7 +609,9 @@ function TableOfContents({ headings, basePath }: { headings: BlogHeading[]; base
     <ol>
       {headings.map((heading) => (
         <li key={heading.id}>
-          <Link to={`${basePath}?section=${heading.id}`}>{heading.text}</Link>
+          <Link to={`${basePath}?section=${heading.id}`}>
+            <span className="toc-number">{heading.number}.</span> {heading.text}
+          </Link>
           {heading.children.length > 0 ? (
             <TableOfContents headings={heading.children} basePath={basePath} />
           ) : null}
