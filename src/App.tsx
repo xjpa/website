@@ -38,6 +38,7 @@ type ThemePalette = {
   text: string;
   muted: string;
   accent: string;
+  dot: string;
   heading: string;
   glow: string;
   grid: string;
@@ -53,6 +54,7 @@ const themePalettes: ThemePalette[] = [
     text: '#dce8ff',
     muted: '#cad9ff',
     accent: '#ff6ea8',
+    dot: '#ff6ea8',
     heading: '#f3f7ff',
     glow: 'rgba(255, 255, 255, 0.08)',
     grid: 'rgba(201, 217, 255, 0.22)',
@@ -66,10 +68,25 @@ const themePalettes: ThemePalette[] = [
     text: '#ebeaa2',
     muted: '#dcd98f',
     accent: '#fef1eb',
+    dot: '#e66f00',
     heading: '#fef1eb',
     glow: 'rgba(254, 241, 235, 0.08)',
     grid: 'rgba(254, 241, 235, 0.18)',
     shadow: 'rgba(9, 43, 20, 0.24)',
+  },
+  {
+    bg: '#f7f4ee',
+    bgTop: '#fffbf2',
+    bgSoft: 'rgba(32, 36, 35, 0.04)',
+    line: 'rgba(32, 36, 35, 0.12)',
+    text: '#202423',
+    muted: '#4d5654',
+    accent: '#e9261e',
+    dot: '#ff0100',
+    heading: '#202423',
+    glow: 'rgba(255, 255, 255, 0.72)',
+    grid: 'rgba(32, 36, 35, 0.12)',
+    shadow: 'rgba(32, 36, 35, 0.08)',
   },
 ];
 

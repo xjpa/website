@@ -60,15 +60,35 @@ const post: BlogPost = {
   </section>
   <section>
     <h2>Analysing Systems</h2>
-    <p></p>
-    <ul>
+    <p>Each of these dimensions defines how a system performs and scales, thusthey become important to analyze</p>
+    <ol>
       <li>Database</li>
+      <p>The persistent layer, cos you'll need somewhere to store the data</p>
+      <ol>
+        <li>in-memory: usually caches</li>
+        <li>blob storage: amazon s3, data is a binary long object, retrieved by key/path</li>
+        <li>flat file storage: sort of blob storage but you can query them</li>
+        <li>server database: MySQL servers</li>
+        <li>embedded: DBs that run in the same app</li>
+        <li>row based</li>
+        <li>columnar</li>
+        <li>disk based</li>
+        <li>graphDB: to model graph relationships</li>
+        <li>time-series: x-axis is time, y-axis is a metric</li>
+        <li>relational DB: SQL</li>
+        <li>non-relational DB: noSQL</li>
+      </ol>
       <li>Caching</li>
+      <p></p>
       <li>Scaling</li>
+      <p>Horizontal/Vertical</p>
       <li>Delegation</li>
+      <p>Basically about how you delegate work, the most underrated way to squeeze more performance for a system</p>
       <li>Concurrency</li>
+      <p>How to handle many concurrent users</p>
       <li>Communication</li>
-    </ul>
+      <p>GRPC system? Raw TCP? UDP?</p>
+    </ol>
   </section>
   <section>
     <h2></h2>
