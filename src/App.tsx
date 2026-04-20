@@ -30,6 +30,53 @@ type RenderedHtmlContent = {
   headings: BlogHeading[];
 };
 
+type ThemePalette = {
+  bg: string;
+  bgTop: string;
+  bgSoft: string;
+  line: string;
+  text: string;
+  muted: string;
+  accent: string;
+  heading: string;
+  glow: string;
+  grid: string;
+  shadow: string;
+};
+
+const themePalettes: ThemePalette[] = [
+  {
+    bg: '#2458db',
+    bgTop: '#2b62e2',
+    bgSoft: 'rgba(255, 255, 255, 0.08)',
+    line: 'rgba(255, 255, 255, 0.18)',
+    text: '#dce8ff',
+    muted: '#cad9ff',
+    accent: '#ff6ea8',
+    heading: '#f3f7ff',
+    glow: 'rgba(255, 255, 255, 0.08)',
+    grid: 'rgba(201, 217, 255, 0.22)',
+    shadow: 'rgba(7, 26, 84, 0.2)',
+  },
+  {
+    bg: '#13773d',
+    bgTop: '#1b8a4b',
+    bgSoft: 'rgba(235, 234, 162, 0.08)',
+    line: 'rgba(254, 241, 235, 0.18)',
+    text: '#ebeaa2',
+    muted: '#dcd98f',
+    accent: '#fef1eb',
+    heading: '#fef1eb',
+    glow: 'rgba(254, 241, 235, 0.08)',
+    grid: 'rgba(254, 241, 235, 0.18)',
+    shadow: 'rgba(9, 43, 20, 0.24)',
+  },
+];
+
+function pickRandomTheme() {
+  return themePalettes[Math.floor(Math.random() * themePalettes.length)];
+}
+
 function resolvePublicAssetPath(path: string) {
   if (!path.startsWith('/')) {
     return path;
@@ -45,6 +92,17 @@ function useDocumentTitle(pageTitle?: string) {
 }
 
 function App() {
+  const theme = useMemo(() => pickRandomTheme(), []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    Object.entries(theme).forEach(([token, value]) => {
+      const cssVar = `--${token.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)}`;
+      root.style.setProperty(cssVar, value);
+    });
+  }, [theme]);
+
   return (
     <div className="page-shell">
       <Header />
