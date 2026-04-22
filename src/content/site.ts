@@ -1,5 +1,6 @@
 export const site = {
   name: 'John Amata',
+  url: 'https://johnamata.com',
   accentDot: true,
   title: 'software and ai engineering',
   intro: [

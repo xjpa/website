@@ -1,6 +1,6 @@
 # John Amata Portfolio + Blog
 
-React + TypeScript portfolio site with a blog section, designed for GitHub Pages.
+React + TypeScript portfolio site with a blog section, designed for GitHub Pages and a custom domain.
 
 ## Quick start
 
@@ -34,5 +34,6 @@ npm run build
 
 ## Notes
 
-- Uses `HashRouter` so blog routes work cleanly on GitHub Pages.
-- Uses Vite with `base: './'` for project-page compatibility.
+- Uses real path-based routes with prerendered HTML pages for SEO.
+- Build emits `robots.txt` and `sitemap.xml` for search engine discovery.
+- Uses Vite with `base: '/'` for the custom domain at `johnamata.com`.

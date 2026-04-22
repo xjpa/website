@@ -11,6 +11,7 @@ import type { BlogPost } from './posts';
 import { projects } from './projects';
 import type { Project } from './projects';
 import { site } from './content/site';
+import { buildCanonicalUrl, getPageMetadata } from './seo';
 
 type TagFilter = {
   label: string;
@@ -102,14 +103,36 @@ function resolvePublicAssetPath(path: string) {
   return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 }
 
-function useDocumentTitle(pageTitle?: string) {
+function usePageMetadata() {
+  const location = useLocation();
+
   useEffect(() => {
-    document.title = pageTitle ? `${pageTitle} | ${site.name}` : site.name;
-  }, [pageTitle]);
+    const metadata = getPageMetadata(location.pathname);
+    document.title = metadata.title;
+
+    const description =
+      document.querySelector('meta[name="description"]') ??
+      Object.assign(document.createElement('meta'), { name: 'description' });
+    description.setAttribute('content', metadata.description);
+
+    if (!description.parentNode) {
+      document.head.appendChild(description);
+    }
+
+    const canonical =
+      document.querySelector('link[rel="canonical"]') ??
+      Object.assign(document.createElement('link'), { rel: 'canonical' });
+    canonical.setAttribute('href', buildCanonicalUrl(metadata.canonicalPath));
+
+    if (!canonical.parentNode) {
+      document.head.appendChild(canonical);
+    }
+  }, [location.pathname]);
 }
 
 function App() {
   const theme = useMemo(() => pickRandomTheme(), []);
+  usePageMetadata();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -165,8 +188,6 @@ function Header() {
 }
 
 function HomePage() {
-  useDocumentTitle();
-
   return (
     <section className="hero-grid">
       <div className="hero-copy">
@@ -217,8 +238,6 @@ function HomePage() {
 }
 
 function BlogIndex() {
-  useDocumentTitle('Blog');
-
   const [activeTag, setActiveTag] = useState('All');
 
   const tagFilters = useMemo<TagFilter[]>(() => {
@@ -298,8 +317,6 @@ function BlogIndex() {
 }
 
 function ArchivePage() {
-  useDocumentTitle('Archive');
-
   return (
     <section className="blog-layout">
       <div className="section-heading">
@@ -322,8 +339,6 @@ function ArchivePage() {
 }
 
 function LifemaxxIndex() {
-  useDocumentTitle('Lifemaxx');
-
   return (
     <section className="blog-layout">
       <div className="section-heading">
@@ -359,8 +374,6 @@ function LifemaxxEntryPage() {
   const location = useLocation();
   const entry = lifemaxxEntries.find((item) => item.slug === slug);
   const renderedEntry = useMemo(() => (entry ? renderHtmlContent(entry.content) : null), [entry]);
-
-  useDocumentTitle(entry ? entry.title : 'Lifemaxx');
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -421,8 +434,6 @@ function ProjectPage() {
   const location = useLocation();
   const project = projects.find((entry) => entry.slug === slug);
   const renderedProject = useMemo(() => (project ? renderHtmlContent(project.content) : null), [project]);
-
-  useDocumentTitle(project ? project.title : 'Project');
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -485,8 +496,6 @@ function BlogPostPage() {
   const location = useLocation();
   const post = posts.find((entry) => entry.slug === slug);
   const renderedPost = useMemo(() => (post ? renderHtmlContent(post.content) : null), [post]);
-
-  useDocumentTitle(post ? post.title : 'Blog');
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -592,25 +601,22 @@ function slugify(value: string) {
 }
 
 function renderHtmlContent(content: string): RenderedHtmlContent {
-  const document = new DOMParser().parseFromString(content, 'text/html');
   const slugCounts = new Map<string, number>();
   const headings: BlogHeading[] = [];
   const headingStack: BlogHeading[] = [];
-
-  document.querySelectorAll('h2, h3, h4, h5').forEach((heading) => {
-    const text = heading.textContent?.trim() ?? '';
+  let html = content.replace(/<h([2-5])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, levelValue, rawAttributes, innerHtml) => {
+    const text = stripHtml(innerHtml).trim();
 
     if (!text) {
-      return;
+      return match;
     }
 
     const baseId = slugify(text);
     const currentCount = slugCounts.get(baseId) ?? 0;
     const id = currentCount === 0 ? baseId : `${baseId}-${currentCount + 1}`;
     slugCounts.set(baseId, currentCount + 1);
-    heading.id = id;
 
-    const level = Number(heading.tagName.slice(1)) as BlogHeading['level'];
+    const level = Number(levelValue) as BlogHeading['level'];
 
     while (headingStack.length > 0 && headingStack[headingStack.length - 1].level >= level) {
       headingStack.pop();
@@ -620,10 +626,6 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
     const siblingIndex = parentHeading ? parentHeading.children.length + 1 : headings.length + 1;
     const number = parentHeading ? `${parentHeading.number}.${siblingIndex}` : `${siblingIndex}`;
     const tocHeading: BlogHeading = { id, text, number, level, children: [] };
-    const headingNumber = document.createElement('span');
-    headingNumber.className = 'heading-number';
-    headingNumber.textContent = `${number}. `;
-    heading.prepend(headingNumber);
 
     if (headingStack.length === 0) {
       headings.push(tocHeading);
@@ -632,49 +634,51 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
     }
 
     headingStack.push(tocHeading);
+
+    return `<h${levelValue}${setAttribute(rawAttributes, 'id', id)}><span class="heading-number">${number}. </span>${innerHtml}</h${levelValue}>`;
   });
 
-  document.querySelectorAll('a[href]').forEach((anchor) => {
-    const href = anchor.getAttribute('href') ?? '';
-
-    if (/^https?:\/\//.test(href)) {
-      anchor.setAttribute('target', '_blank');
-      anchor.setAttribute('rel', 'noreferrer');
+  html = html.replace(/<a\b([^>]*?)href=(["'])(.*?)\2([^>]*)>/gi, (match, beforeHref, quote, href, afterHref) => {
+    if (!/^https?:\/\//i.test(href)) {
+      return match;
     }
+
+    let attributes = `${beforeHref}href=${quote}${href}${quote}${afterHref}`;
+    attributes = setAttribute(attributes, 'target', '_blank');
+    attributes = setAttribute(attributes, 'rel', 'noreferrer');
+    return `<a${attributes}>`;
   });
 
-  document.querySelectorAll('img[src], source[src], video[src]').forEach((element) => {
-    const src = element.getAttribute('src') ?? '';
-    if (src.startsWith('/')) {
-      element.setAttribute('src', resolvePublicAssetPath(src));
+  html = html.replace(/<(img|source|video)\b([^>]*?)src=(["'])(.*?)\3([^>]*)>/gi, (match, tagName, beforeSrc, quote, src, afterSrc) => {
+    if (!src.startsWith('/')) {
+      return match;
     }
+
+    return `<${tagName}${beforeSrc}src=${quote}${resolvePublicAssetPath(src)}${quote}${afterSrc}>`;
   });
 
-  document.querySelectorAll('pre > code').forEach((codeElement) => {
+  html = html.replace(/<pre\b([^>]*)>\s*<code\b([^>]*)>([\s\S]*?)<\/code>\s*<\/pre>/gi, (match, preAttributes, codeAttributes, codeHtml) => {
     const language =
-      codeElement.className.match(/language-([a-z0-9-]+)/i)?.[1] ??
-      codeElement.getAttribute('data-language') ??
+      codeAttributes.match(/class=(["'])[^"']*language-([a-z0-9-]+)[^"']*\1/i)?.[2] ??
+      codeAttributes.match(/data-language=(["'])(.*?)\1/i)?.[2] ??
       'text';
-    const code = codeElement.textContent ?? '';
-    const preElement = codeElement.parentElement;
+    const decodedCode = decodeHtml(codeHtml);
+    const highlightedCode = renderHighlightedCodeHtml(decodedCode, language);
 
-    if (!preElement) {
-      return;
-    }
-
-    codeElement.innerHTML = renderHighlightedCodeHtml(code, language);
-    preElement.classList.add('code-block-pre');
+    return `<pre${appendClassName(preAttributes, 'code-block-pre')}><code${codeAttributes}>${highlightedCode}</code></pre>`;
   });
 
-  document.querySelectorAll('iframe').forEach((iframe) => {
-    iframe.classList.add('embed-frame');
-    if (!iframe.getAttribute('loading')) {
-      iframe.setAttribute('loading', 'lazy');
+  html = html.replace(/<iframe\b([^>]*)>/gi, (match, attributes) => {
+    let nextAttributes = appendClassName(attributes, 'embed-frame');
+    if (!/\sloading\s*=/i.test(nextAttributes)) {
+      nextAttributes += ' loading="lazy"';
     }
+
+    return `<iframe${nextAttributes}>`;
   });
 
   return {
-    html: document.body.innerHTML,
+    html,
     headings,
   };
 }
@@ -718,6 +722,47 @@ function escapeHtml(value: string) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function stripHtml(value: string) {
+  return decodeHtml(value.replace(/<[^>]+>/g, ''));
+}
+
+function decodeHtml(value: string) {
+  return value
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&');
+}
+
+function setAttribute(attributes: string, name: string, value: string) {
+  const attributePattern = new RegExp(`\\s${name}\\s*=\\s*([\"']).*?\\1`, 'i');
+
+  if (attributePattern.test(attributes)) {
+    return attributes.replace(attributePattern, ` ${name}="${escapeHtml(value)}"`);
+  }
+
+  return `${attributes} ${name}="${escapeHtml(value)}"`;
+}
+
+function appendClassName(attributes: string, className: string) {
+  const classMatch = attributes.match(/\sclass\s*=\s*(["'])(.*?)\1/i);
+
+  if (!classMatch) {
+    return `${attributes} class="${className}"`;
+  }
+
+  const existingClassNames = classMatch[2]
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (!existingClassNames.includes(className)) {
+    existingClassNames.push(className);
+  }
+
+  return attributes.replace(classMatch[0], ` class="${existingClassNames.join(' ')}"`);
 }
 
 function formatDate(date: string) {
