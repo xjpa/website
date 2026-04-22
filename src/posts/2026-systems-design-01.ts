@@ -2,12 +2,14 @@ import type { BlogPost } from './types';
 
 const post: BlogPost = {
   slug: '2026-systems-design-01',
-  title: 'System Design 1: Mindset',
+  title: 'System Design 1: Essentials',
   date: '2026-04-20',
   summary: 'My notes from studying systems design',
   tags: ['system-design'],
   //coverImage: portraitSrc,
-  content: `
+  content:
+    `
+  <p>I will be continuously updating this and adding sections over the next month</p>
   <section>
     <h2>Scope of Designing Systems</h2>
     <p></p>
@@ -91,10 +93,29 @@ const post: BlogPost = {
     </ol>
   </section>
   <section>
-    <h2></h2>
+    <h2>Basics</h2>
     <p></p>
   </section>
-  
+  <section>
+    <h2>Databases</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>Caching</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>Async</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>Resiliency</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>Scaling</h2>
+    <p></p>
+  </section>
   `,
 };
 

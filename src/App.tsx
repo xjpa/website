@@ -51,7 +51,7 @@ const themePalettes: ThemePalette[] = [
     bgTop: '#2b62e2',
     bgSoft: 'rgba(255, 255, 255, 0.08)',
     line: 'rgba(255, 255, 255, 0.18)',
-    text: '#dce8ff',
+    text: '#dce8ff', //#C1F6FF
     muted: '#cad9ff',
     accent: '#ff6ea8',
     dot: '#ff6ea8',

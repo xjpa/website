@@ -11,6 +11,8 @@ const project: Project = {
     <p>Reference: Professor Raquel T. Marasigan (<a href="raquel.marasigan@dlsu.edu.ph">email</a>) (<a href="https://www.linkedin.com/in/raqs-m/">linkedin</a>) (<a href="https://scholar.google.com/citations?user=FTaplP0AAAAJ&hl=en">scholar</a>)
     <p>I designed it for pedagogical teaching similar to xv6, implementing recommendations based on this paper called <a href="https://events.roedu.net/event/7/contributions/236/contribution.pdf">Improving The Educational Value of Operating
 Systems</a>. I may have to revisit this again to improve the system and write a worthy systems programming paper about it.</p>
+    <p>Link: <a href="https://github.com/xjpa/rootOS">Code</a>, <a href="https://drive.google.com/file/d/1V_rvrd5n2t9WbDaLY4xWfvkBC9ygw58N/view?usp=sharing">prof mentioning my work</a></p>
+    <p>Reference: Professor Raquel T. Marasigan (<a href="raquel.marasigan@dlsu.edu.ph">email</a>) (<a href="https://www.linkedin.com/in/raqs-m/">linkedin</a>) (<a href="https://scholar.google.com/citations?user=FTaplP0AAAAJ&hl=en">scholar</a>)
     <h2>CookedOS - an OS for fun (2026)</h2>
     <img src="https://raw.githubusercontent.com/xjpa/cookedOS/main/screenshot3.jpg">
     <p>Link: <a href="https://github.com/xjpa/cookedOS">Code</a></p>
