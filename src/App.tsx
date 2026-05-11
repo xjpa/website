@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import portraitOne from './assets/slide1.jpg';
+import { Link, Route, Routes, useLocation, useParams, useSearchParams } from 'react-router-dom';
+import portraitOne from './assets/slide01.jpg';
 import portraitTwo from './assets/slide2.jpg';
 import portraitThree from './assets/slide3.jpg';
 import { highlightCode } from './codeHighlight';
@@ -91,8 +91,19 @@ const themePalettes: ThemePalette[] = [
   },
 ];
 
+const RANDOMIZE_THEME_ON_LOAD = false;
+const DEFAULT_THEME_INDEX = 2;
+
 function pickRandomTheme() {
   return themePalettes[Math.floor(Math.random() * themePalettes.length)];
+}
+
+function getTheme() {
+  if (RANDOMIZE_THEME_ON_LOAD) {
+    return pickRandomTheme();
+  }
+
+  return themePalettes[DEFAULT_THEME_INDEX];
 }
 
 function resolvePublicAssetPath(path: string) {
@@ -131,7 +142,7 @@ function usePageMetadata() {
 }
 
 function App() {
-  const theme = useMemo(() => pickRandomTheme(), []);
+  const theme = useMemo(() => getTheme(), []);
   usePageMetadata();
 
   useEffect(() => {
@@ -171,7 +182,7 @@ function Header() {
       </Link>
       <nav className="nav">
         <Link className={location.pathname === '/' ? 'active' : ''} to="/">
-          portfolio
+          home
         </Link>
         <Link className={location.pathname.startsWith('/blog') ? 'active' : ''} to="/blog">
           blog
@@ -206,16 +217,17 @@ function HomePage() {
           <li>
             <a href={`mailto:${site.email}`}>{site.email}</a>
           </li>
-          <li>code:
+          {/*<li>code:
             <a href={site.github} target="_blank" rel="noreferrer">
               github.com/xjpa
             </a>
           </li>
+          */}
 
         </ul>
 
         <section className="panel">
-          <h2>Projects.</h2>
+          <h2>Stuff.</h2>
           <ul className="project-list">
             {projects.map((project) => (
               <li key={project.slug}>
@@ -238,7 +250,8 @@ function HomePage() {
 }
 
 function BlogIndex() {
-  const [activeTag, setActiveTag] = useState('All');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedTag = searchParams.get('tag');
 
   const tagFilters = useMemo<TagFilter[]>(() => {
     const tagCounts = new Map<string, number>();
@@ -257,18 +270,30 @@ function BlogIndex() {
     ];
   }, []);
 
+  const activeTag =
+    selectedTag && tagFilters.some((tag) => tag.label === selectedTag) ? selectedTag : 'All';
+
   const visiblePosts = useMemo(
     () => (activeTag === 'All' ? posts : posts.filter((post) => post.tags.includes(activeTag))),
     [activeTag],
   );
 
+  function handleTagFilterChange(tag: string) {
+    if (tag === 'All') {
+      setSearchParams({});
+      return;
+    }
+
+    setSearchParams({ tag });
+  }
+
   return (
     <section className="blog-layout">
       <div className="section-heading">
         <p className="eyebrow">Blog</p>
-        <h1>Notes on AI, security, and systems.</h1>
+        <h1>on software, and systems</h1>
         <p className="about-copy">
-          full stack from math to systems
+          notes to self
         </p>
       </div>
 
@@ -278,7 +303,7 @@ function BlogIndex() {
             <button
               key={tag.label}
               className={`tag-filter ${activeTag === tag.label ? 'active' : ''}`}
-              onClick={() => setActiveTag(tag.label)}
+              onClick={() => handleTagFilterChange(tag.label)}
               type="button"
             >
               <span>{tag.label}</span>
@@ -304,9 +329,9 @@ function BlogIndex() {
             <p>{post.summary}</p>
             <div className="tag-row">
               {post.tags.map((tag) => (
-                <span className="tag" key={tag}>
+                <Link className="tag tag-link" key={tag} to={`/blog?tag=${encodeURIComponent(tag)}`}>
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
           </article>
@@ -343,8 +368,8 @@ function LifemaxxIndex() {
     <section className="blog-layout">
       <div className="section-heading">
         <p className="eyebrow">Lifemaxx</p>
-        <h1>Protocols for high-agency living</h1>
-        <p className="about-copy">performance optimization for business, life, school</p>
+        <h1>on being human again</h1>
+        <p className="about-copy">wrong turns, lucky nights, and proofs of life</p>
       </div>
 
       <div className="posts-grid">
@@ -534,9 +559,9 @@ function BlogPostPage() {
       <p className="about-copy">{post.summary}</p>
       <div className="tag-row">
         {post.tags.map((tag) => (
-          <span className="tag" key={tag}>
+          <Link className="tag tag-link" key={tag} to={`/blog?tag=${encodeURIComponent(tag)}`}>
             {tag}
-          </span>
+          </Link>
         ))}
       </div>
       {renderedPost && countHeadings(renderedPost.headings) > 1 ? (

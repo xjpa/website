@@ -1,6 +1,6 @@
 :root {
   color-scheme: dark;
-  font-family: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
   line-height: 1.6;
   font-weight: 400;
   color: var(--text);
@@ -9,18 +9,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --bg: #2458db;
-  --bg-top: #2b62e2;
-  --bg-soft: rgba(255, 255, 255, 0.08);
-  --line: rgba(255, 255, 255, 0.18);
-  --text: #dce8ff;
-  --muted: #cad9ff;
-  --accent: #ff6ea8;
-  --dot: #ff6ea8;
-  --heading: #f3f7ff;
-  --glow: rgba(255, 255, 255, 0.08);
-  --grid: rgba(201, 217, 255, 0.22);
-  --shadow: rgba(7, 26, 84, 0.2);
+  --bg: #f7f4ee;
+  --bg-top: #fffbf2;
+  --bg-soft: rgba(32, 36, 35, 0.04);
+  --line: rgba(32, 36, 35, 0.12);
+  --text: #202423;
+  --muted: #4d5654;
+  --accent: #e9261e;
+  --dot: #ff0100;
+  --heading: #202423;
+  --glow: rgba(255, 255, 255, 0.72);
+  --grid: rgba(32, 36, 35, 0.12);
+  --shadow: rgba(32, 36, 35, 0.08);
 }
 
 * {
@@ -133,6 +133,16 @@ a {
 .project-list,
 .about-copy {
   font-size: clamp(1rem, 1.7vw, 1.2rem);
+}
+
+.post-card p {
+  font-size: clamp(1.05rem, 1.7vw, 1.18rem);
+  line-height: 1.75;
+}
+
+.post-body p {
+  font-size: clamp(1.08rem, 1.75vw, 1.22rem);
+  line-height: 1.85;
 }
 
 .lede,
@@ -363,6 +373,10 @@ a {
   margin: 8px 0 14px;
 }
 
+.post-card h2 {
+  font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+}
+
 .post-cover,
 .post-hero {
   width: 100%;
@@ -388,6 +402,7 @@ a {
 .post-date {
   color: var(--muted);
   margin-bottom: 0;
+  font-size: 1rem;
 }
 
 .tag-row {
@@ -401,6 +416,14 @@ a {
   border: 1px solid var(--line);
   padding: 4px 10px;
   color: var(--heading);
+}
+
+.tag-link {
+  text-decoration: none;
+}
+
+.tag-link:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .post-layout {
@@ -427,6 +450,15 @@ a {
 .post-layout .tag,
 .post-layout .project-link {
   color: var(--article-heading);
+}
+
+.post-layout h1 {
+  font-size: clamp(2.4rem, 5vw, 3.35rem);
+}
+
+.post-layout .about-copy {
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.75;
 }
 
 .post-layout .post-date,
@@ -460,6 +492,10 @@ a {
   background: var(--article-tag-bg);
 }
 
+.post-layout .tag-link:hover {
+  background: rgba(31, 79, 184, 0.12);
+}
+
 .post-layout .project-tag-link {
   text-decoration: none;
 }
@@ -482,6 +518,7 @@ a {
 
 .archive-item h2 {
   margin: 6px 0 0;
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
 }
 
 .archive-item h2 a {
@@ -567,6 +604,8 @@ a {
   margin-left: 1.2rem;
   padding-left: 1.25rem;
   color: var(--text);
+  font-size: clamp(1.08rem, 1.75vw, 1.22rem);
+  line-height: 1.85;
 }
 
 .post-body li {
@@ -579,6 +618,8 @@ a {
   padding-left: 16px;
   border-left: 2px solid var(--accent);
   color: var(--heading);
+  font-size: clamp(1.08rem, 1.75vw, 1.22rem);
+  line-height: 1.85;
 }
 
 .post-section {
@@ -588,7 +629,7 @@ a {
 .post-section h2 {
   margin-top: 42px;
   margin-bottom: 16px;
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-size: clamp(1.55rem, 2.6vw, 2.2rem);
   color: var(--heading);
 }
 
@@ -665,7 +706,7 @@ a {
   margin-top: 8px;
 }
 
-.post-layout .table-of-contents li > ol {
+.post-layout .table-of-contents li>ol {
   margin-top: 8px;
 }
 
@@ -680,19 +721,22 @@ a {
 .post-body h3 {
   margin-top: 28px;
   margin-bottom: 12px;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: clamp(1.25rem, 2.1vw, 1.5rem);
 }
 
 .post-body h4,
 .post-body h5 {
   margin-top: 22px;
   margin-bottom: 10px;
+  font-size: clamp(1.08rem, 1.9vw, 1.22rem);
 }
 
-.post-body-html>* {
+.post-body-html> :not(img):not(figure):not(.code-block):not(.embed-frame):not(iframe):not(video) {
   max-width: 700px;
 }
 
+.post-body-html>img,
+.post-body-html>figure,
 .post-body-html figure,
 .post-body-html .code-block,
 .post-body-html .embed-frame,
@@ -739,9 +783,12 @@ a {
 }
 
 .post-body-html img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  height: auto;
   display: block;
-  border: 1px solid var(--article-line);
+  margin: 24px 0;
+  border: 0;
 }
 
 .code-block {
@@ -806,4 +853,20 @@ a {
 .post-figure figcaption {
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.post-body-html .post-figure-portrait {
+  max-width: 420px;
+  overflow: hidden;
+}
+
+.post-body-html .post-figure-portrait img {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
 }
