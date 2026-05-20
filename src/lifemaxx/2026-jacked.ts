@@ -33,34 +33,84 @@ const entry: LifemaxxEntry = {
     <p>imo the best weight training is the one that'll get you consistent. engaging in researching whats the most optimal workout to look "shredded", or "balanced", or a guide to look like some lame "alpha male" tiktok bros admire will just lead you down to a rabbithole of rumination instead of execution</p>
     <p>look at my physique on the pic above, i got there from working out just 1-2x a week simply by increasing the weights. progressive overload over months and eating enough protein was enough. consistency works.</p>
     <section>
-    <ul>
-      <li>Monday</li>
-      <ul>
-        <li>Squat 4x5</li>
-        <li>Chest Supported Rows 5x8</li>
-      </ul>
-      <li>Tuesday</li>
-       <ul>
-        <li>Incline Bench Press 4x5</li>
-        <li>Pullups 3xAMRAP</li>
-        <li>Deadlift 1x5</li>
-      </ul>
-       <li>Thursday</li>
-      <ul>
-        <li>Squat 4x5</li>
-        <li>Chest Supported Rows 5x8</li>
-      </ul>
-      <li>Friday</li>
-       <ul>
-        <li>Incline Bench Press 4x5</li>
-        <li>Pullups 3xAMRAP</li>
-        <li>Deadlift 1x5</li>
-      </ul>
-      <li>Weakpoints</li>
-      <ul>
-        <li>Hit weakpoints like shoulders/delts, neck, abs, whatever you want randomly throughout the week</li>
-      </ul>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>AM</th>
+          <th>PM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monday</td>
+          <td>
+            <ul>
+              <li>Squat 4x5</li>
+              <li>Chest Supported Rows 5x8</li>
+            </ul>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>Tuesday</td>
+          <td>
+            <ul>
+              <li>Incline Bench Press 4x5</li>
+              <li>Pullups 3xAMRAP</li>
+              <li>Deadlift 1x5</li>
+            </ul>
+          </td>
+          <td>     <ul>
+              <li>DB Lateral Raises 4x8</li>
+              <li>Zottman Curls 3x8</li>
+              <li>Tricep Rope Pushdown 3x8</li>
+            </ul></td>
+        </tr>
+
+        <tr>
+          <td>Wednesday</td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>Thursday</td>
+          <td>
+            <ul>
+              <li>Squat 4x5</li>
+              <li>Chest Supported Rows 5x8</li>
+            </ul>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>Friday</td>
+          <td>
+            <ul>
+              <li>Incline Bench Press 4x5</li>
+              <li>Pullups 3xAMRAP</li>
+              <li>Deadlift 1x5</li>
+            </ul>
+          </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>Saturday</td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>Sunday</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
     </section>
 
     

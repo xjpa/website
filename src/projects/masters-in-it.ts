@@ -28,20 +28,10 @@ const project: Project = {
     </ol>
     <p>With AI, skilling yourself technically isnt a big challenge, just do some projects or grind a book. There is no need to take an advanced algorithms class present in MS CS when I can just solve some algorithmic problems at leetcode or kattis. What you need is that <b>cross disciplinary thinking</b>, having a broad view.</p>
     <blockquote>Because the goal is not to become a code monkey</blockquote>
-    <p>Thanks to my dad and other relatives, I got into rooms where CEOs and industry leaders were present. Not a single one understood what a computer science education is, but they can tell what an IT education is. Thats a big part of what swayed me. For the majority of the population, even the girls I met during travel, potential business partners and networking opportunities, an IT education was clearly in favor. They want the tech guy who can do anything.</p>
-    <p>The only ones who knew about MSCS, are technical founders and software engineers/data scientists. A CS masters "could" impress them as its more technical, but so is an AWS certificate or performing well at the coding interview. Finally the question then is do I want to impress these senior engineers? Initially if youre early in your career that is a good thing, and a masters could be a double edge as plenty of seniors are smug enough to think actual experience > masters. But will you still have that impression when youre in your 40 or 50?</p>
-    <p>To that last question, I thought hell no. At that age you should be thinking about:</p>
-    <ol>
-      <li>budgets</li>
-      <li>expansion</li>
-      <li>influencing groups of people for your architecture/product design</li>
-      <li>AI/digital transformation</li>
-      <li>convincing stakeholders and investors</li>
-      <li>finance and sales</li>
-    </ol>
+    <p>Silo-ing your expertise to a corner where you are competing with a machine or a human with better access compute/AI models, is a rat race thats only enticing if youre early in your career.  The only way to succeed in the industry is to move up the abstraction layer and be the one influencing the path of engineering, e.g.  system design, product thinking, cross-organizational influence, solutions engineering, roadmap and delivery planning</p>
+    
     <p>Masters in IT covers a good enough broad view of the intersection between business and tech execution, and I can always just add electives later to deepen myself in the technical details.</p>
     <p>I'll just take a business oriented masters like an MBA as my 2nd masters later, or a domain expansive masters like computational finance or whatever interesting niche I'll come across later that I want to embed and apply my technical skills into.</p>
-    <p>My father had 2 masters degrees, took them in his late 30s in the philippines and then the 2nd one abroad in his 40s. And hes doing very well for himself, has a respectable career and manages groups of at least 1,000 people with millions worth of assets under his command. I decided to take the same route of eventually getting 2 masters. He was able to do it at top institutions while managing a demanding career, and still being able to travel like him taking me and my siblings and mother out for skiing. So why shouldnt I take that challenge? If a masters in IT tends to not open as much doors for me, then I can alawys just take another masters, it shouldnt be an issue. In the end, the only problem that can happen is the choice of being idle. Whether you like it or not, a year is gonna pass by, will you remain in the status quo?</p>
   </section>
   `,
 };

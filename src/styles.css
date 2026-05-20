@@ -735,6 +735,53 @@ a {
   max-width: 700px;
 }
 
+.post-body-html table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--article-line);
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.post-body-html table thead,
+.post-body-html table tbody {
+  width: 100%;
+}
+
+.post-body-html table tr {
+  border-bottom: 1px solid var(--article-line);
+}
+
+.post-body-html table th,
+.post-body-html table td {
+  min-width: 140px;
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+  color: var(--article-text);
+}
+
+.post-body-html table th {
+  font-weight: 600;
+  color: var(--article-heading);
+  background: rgba(31, 28, 24, 0.04);
+  white-space: nowrap;
+}
+
+.post-body-html table td {
+  overflow-wrap: anywhere;
+}
+
+.post-body-html table td ul,
+.post-body-html table td ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.post-body-html table td li + li {
+  margin-top: 0.35rem;
+}
+
 .post-body-html>img,
 .post-body-html>figure,
 .post-body-html figure,
@@ -869,4 +916,59 @@ a {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center top;
+}
+
+@media (max-width: 640px) {
+  .post-body-html table,
+  .post-body-html table thead,
+  .post-body-html table tbody,
+  .post-body-html table tr,
+  .post-body-html table th,
+  .post-body-html table td {
+    display: block;
+  }
+
+  .post-body-html table {
+    border: 0;
+    background: transparent;
+  }
+
+  .post-body-html table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .post-body-html table tr {
+    margin-bottom: 14px;
+    border: 1px solid var(--article-line);
+    background: rgba(255, 255, 255, 0.34);
+  }
+
+  .post-body-html table td {
+    min-width: 0;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(48, 42, 34, 0.08);
+  }
+
+  .post-body-html table td:last-child {
+    border-bottom: 0;
+  }
+
+  .post-body-html table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--article-muted);
+  }
 }

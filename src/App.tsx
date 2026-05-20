@@ -76,6 +76,7 @@ const themePalettes: ThemePalette[] = [
     shadow: 'rgba(9, 43, 20, 0.24)',
   },
   {
+    /* alternatively i like this color for bg: #FEF49C */
     bg: '#f7f4ee',
     bgTop: '#fffbf2',
     bgSoft: 'rgba(32, 36, 35, 0.04)',
@@ -702,6 +703,8 @@ function renderHtmlContent(content: string): RenderedHtmlContent {
     return `<iframe${nextAttributes}>`;
   });
 
+  html = addResponsiveTableLabels(html);
+
   return {
     html,
     headings,
@@ -760,6 +763,42 @@ function decodeHtml(value: string) {
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&amp;/g, '&');
+}
+
+function addResponsiveTableLabels(html: string) {
+  return html.replace(/<table\b[^>]*>[\s\S]*?<\/table>/gi, (tableHtml) => {
+    const headerMatch = tableHtml.match(/<thead\b[^>]*>[\s\S]*?<tr\b[^>]*>([\s\S]*?)<\/tr>[\s\S]*?<\/thead>/i);
+    const headers = headerMatch
+      ? Array.from(headerMatch[1].matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/gi)).map((match) => stripHtml(match[1]).trim())
+      : [];
+
+    if (headers.length === 0) {
+      return tableHtml;
+    }
+
+    return tableHtml.replace(/<tr\b([^>]*)>([\s\S]*?)<\/tr>/gi, (rowMatch: string, rowAttributes: string, rowInnerHtml: string) => {
+      if (/<th\b/i.test(rowInnerHtml)) {
+        return rowMatch;
+      }
+
+      let cellIndex = 0;
+      const updatedRowHtml = rowInnerHtml.replace(
+        /<td\b([^>]*)>([\s\S]*?)<\/td>/gi,
+        (cellMatch: string, cellAttributes: string, cellInnerHtml: string) => {
+        const header = headers[cellIndex] ?? '';
+        cellIndex += 1;
+
+        if (!header) {
+          return cellMatch;
+        }
+
+        return `<td${setAttribute(cellAttributes, 'data-label', header)}>${cellInnerHtml}</td>`;
+        },
+      );
+
+      return `<tr${rowAttributes}>${updatedRowHtml}</tr>`;
+    });
+  });
 }
 
 function setAttribute(attributes: string, name: string, value: string) {
