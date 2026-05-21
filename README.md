@@ -1,6 +1,6 @@
 # John Amata Portfolio + Blog
 
-React + TypeScript portfolio site with a blog section, designed for GitHub Pages and a custom domain.
+AstroJS
 
 ## Quick start
 
@@ -17,23 +17,22 @@ npm run build
 
 ## Deploy to GitHub Pages
 
-1. Push this repo to GitHub.
-2. Run:
+Deployment is handled by [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml).
 
-   ```bash
-   npm run deploy
-   ```
-
-3. In GitHub, enable **Pages** for the deployed branch if needed.
+1. Push to `main`.
+2. In GitHub, set **Pages** to use **GitHub Actions**.
+3. Keep `public/CNAME` if the site should continue serving `johnamata.com`.
 
 ## Customize content
 
 - Main site content: `src/content/site.ts`
-- Blog posts: `src/content/posts.ts`
+- Blog posts: `src/content/blog/*.md`
+- Projects: `src/content/projects/*.md`
+- Lifemaxx entries: `src/content/lifemaxx/*.md`
 - Styling: `src/styles.css`
 
 ## Notes
 
-- Uses real path-based routes with prerendered HTML pages for SEO.
-- Build emits `robots.txt` and `sitemap.xml` for search engine discovery.
-- Uses Vite with `base: '/'` for the custom domain at `johnamata.com`.
+- Uses Astro content collections for long-form content.
+- Uses static output suitable for GitHub Pages.
+- Syntax-highlighted code blocks use Astro's built-in Shiki pipeline.

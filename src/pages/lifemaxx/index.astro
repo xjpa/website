@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate, sortByDateDesc } from '../../lib/content';
+
+const entries = sortByDateDesc(await getCollection('lifemaxx'));
+---
+
+<BaseLayout
+  title="Lifemaxx | John Amata"
+  description="Protocols, experiments, and notes on high-agency living and performance."
+  canonicalPath="/lifemaxx"
+>
+  <section class="blog-layout">
+    <div class="section-heading">
+      <p class="eyebrow">Lifemaxx</p>
+      <h1>on being human again</h1>
+      <p class="about-copy">wrong turns, lucky nights, and proofs of life</p>
+    </div>
+
+    <div class="posts-grid">
+      {
+        entries.map((entry) => (
+          <article class="post-card">
+            <p class="post-date">{formatDate(entry.data.date)}</p>
+            <h2>
+              <a href={`/lifemaxx/${entry.slug}/`}>{entry.data.title}</a>
+            </h2>
+            <p>{entry.data.summary}</p>
+            <div class="tag-row">
+              {entry.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate, sortByDateDesc } from '../lib/content';
+
+const posts = sortByDateDesc(await getCollection('blog'));
+---
+
+<BaseLayout
+  title="Archive | John Amata"
+  description="Archive of all published technical posts."
+  canonicalPath="/archive"
+>
+  <section class="blog-layout">
+    <div class="section-heading">
+      <p class="eyebrow">Archive</p>
+      <h1>All tech blog posts.</h1>
+    </div>
+
+    <div class="archive-list">
+      {
+        posts.map((post) => (
+          <article class="archive-item">
+            <p class="post-date">{formatDate(post.data.date)}</p>
+            <h2>
+              <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+            </h2>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

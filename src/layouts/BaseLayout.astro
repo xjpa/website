@@ -1,0 +1,45 @@
+---
+import Header from '../components/Header.astro';
+import { site } from '../content/site';
+import '../styles.css';
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+};
+
+const {
+  title = site.name,
+  description = 'Portfolio and blog for John Amata on AI, cybersecurity, systems, and software engineering.',
+  canonicalPath = Astro.url.pathname,
+} = Astro.props;
+
+const canonicalUrl = canonicalPath === '/' ? `${site.url}/` : `${site.url}${canonicalPath}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/eagle.png" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header pathname={Astro.url.pathname} />
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

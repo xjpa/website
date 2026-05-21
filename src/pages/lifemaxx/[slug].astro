@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import { buildToc, formatDate } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('lifemaxx');
+  return entries.map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+const entries = await getCollection('lifemaxx');
+const { slug } = Astro.params;
+const entry = entries.find((item) => item.slug === slug);
+
+if (!entry) {
+  throw new Error(`Lifemaxx entry not found for slug: ${slug}`);
+}
+
+const { Content, headings } = await entry.render();
+const toc = buildToc(headings);
+---
+
+<BaseLayout
+  title={`${entry.data.title} | John Amata`}
+  description={entry.data.summary}
+  canonicalPath={`/lifemaxx/${entry.slug}`}
+>
+  <article class="post-layout">
+    <a class="inline-link" href="/lifemaxx">← Back to lifemaxx</a>
+    <p class="post-date">{formatDate(entry.data.date)}</p>
+    <h1>{entry.data.title}</h1>
+    <p class="about-copy">{entry.data.summary}</p>
+    <div class="tag-row">
+      {entry.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+    </div>
+    {
+      headings.length > 1 ? (
+        <nav class="table-of-contents" aria-label="Table of contents">
+          <p class="toc-title">Contents</p>
+          <TableOfContents headings={toc} />
+        </nav>
+      ) : null
+    }
+    <div class="post-body post-body-html">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

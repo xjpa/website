@@ -1,0 +1,37 @@
+---
+import portraitOne from '../assets/slide01.jpg';
+import portraitTwo from '../assets/slide2.jpg';
+import portraitThree from '../assets/slide3.jpg';
+
+const portraits = [portraitOne, portraitTwo, portraitThree];
+---
+
+<div class="ascii-card" data-portrait-rotator>
+  <div class="portrait-frame">
+    <div class="portrait-grid" aria-hidden="true"></div>
+    {
+      portraits.map((portrait, index) => (
+        <img
+          class:list={['portrait-image', { 'is-active': index === 0 }]}
+          src={portrait.src}
+          alt="John Amata portrait"
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script is:inline>
+  const rotators = document.querySelectorAll('[data-portrait-rotator]');
+
+  for (const rotator of rotators) {
+    const images = rotator.querySelectorAll('.portrait-image');
+    let activeIndex = 0;
+
+    window.setInterval(() => {
+      images[activeIndex]?.classList.remove('is-active');
+      activeIndex = (activeIndex + 1) % images.length;
+      images[activeIndex]?.classList.add('is-active');
+    }, 2800);
+  }
+</script>

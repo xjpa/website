@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate, sortByDateDesc } from '../../lib/content';
+
+const posts = sortByDateDesc(await getCollection('blog'));
+const tagCounts = new Map<string, number>();
+
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  }
+}
+
+const tagFilters = [{ label: 'All', count: posts.length }].concat(
+  Array.from(tagCounts.entries())
+    .sort((left, right) => left[0].localeCompare(right[0]))
+    .map(([label, count]) => ({ label, count })),
+);
+---
+
+<BaseLayout
+  title="Blog | John Amata"
+  description="Technical notes on AI, security, systems, and software engineering."
+  canonicalPath="/blog"
+>
+  <section class="blog-layout">
+    <div class="section-heading">
+      <p class="eyebrow">Blog</p>
+      <h1>on software, and systems</h1>
+      <p class="about-copy">notes to self</p>
+    </div>
+
+    <div class="blog-toolbar">
+      <div class="tag-cloud" aria-label="Filter posts by tag">
+        {
+          tagFilters.map((tag) => (
+            <button class="tag-filter" data-tag-filter={tag.label} type="button">
+              <span>{tag.label}</span>
+              <span class="tag-count">{tag.count}</span>
+            </button>
+          ))
+        }
+      </div>
+      <a class="inline-link archive-link" href="/archive">
+        Browse archive →
+      </a>
+    </div>
+
+    <div class="posts-grid" data-posts-grid>
+      {
+        posts.map((post) => (
+          <article class="post-card" data-post-card data-tags={post.data.tags.join('|')}>
+            <p class="post-date">{formatDate(post.data.date)}</p>
+            <h2>
+              <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+            </h2>
+            {post.data.coverImage ? <img class="post-cover" src={post.data.coverImage} alt={post.data.title} /> : null}
+            <p>{post.data.summary}</p>
+            <div class="tag-row">
+              {post.data.tags.map((tag: string) => <a class="tag tag-link" href={`/blog?tag=${encodeURIComponent(tag)}`}>{tag}</a>)}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <script is:inline>
+    const buttons = Array.from(document.querySelectorAll('[data-tag-filter]'));
+    const cards = Array.from(document.querySelectorAll('[data-post-card]'));
+
+    function applyTag(tag) {
+      const activeTag = tag && buttons.some((button) => button.dataset.tagFilter === tag) ? tag : 'All';
+
+      for (const button of buttons) {
+        button.classList.toggle('active', button.dataset.tagFilter === activeTag);
+      }
+
+      for (const card of cards) {
+        const tags = (card.dataset.tags || '').split('|').filter(Boolean);
+        const visible = activeTag === 'All' || tags.includes(activeTag);
+        card.toggleAttribute('hidden', !visible);
+      }
+
+      const url = new URL(window.location.href);
+      if (activeTag === 'All') {
+        url.searchParams.delete('tag');
+      } else {
+        url.searchParams.set('tag', activeTag);
+      }
+      window.history.replaceState({}, '', url);
+    }
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => applyTag(button.dataset.tagFilter || 'All'));
+    }
+
+    applyTag(new URL(window.location.href).searchParams.get('tag'));
+  </script>
+</BaseLayout>

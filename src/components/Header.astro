@@ -1,0 +1,17 @@
+---
+type Props = {
+  pathname: string;
+};
+
+const { pathname } = Astro.props;
+---
+
+<header class="topbar">
+  <a class="brand" href="/">John Patrick Amata</a>
+  <nav class="nav">
+    <a class={pathname === '/' ? 'active' : ''} href="/">home</a>
+    <a class={pathname.startsWith('/blog') ? 'active' : ''} href="/blog">blog</a>
+    <a class={pathname === '/archive' ? 'active' : ''} href="/archive">archive</a>
+    <a class={pathname.startsWith('/lifemaxx') ? 'active' : ''} href="/lifemaxx">lifemaxx</a>
+  </nav>
+</header>
