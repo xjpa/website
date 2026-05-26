@@ -94,7 +94,7 @@ Cos simply just saying "build a social network" means a lot of things. Its much 
 
 ## SPOF
 
-Criticial user journeys shouldnt depend on an unrecoverable SPOF. And if we have to (cos theres always SPOFs somewhere in real life systems), it needs to be explicitly accepted and made known.  Such as for a startup prototype, 1 postgres instance may be fine but for banks then youll need backups, failover, audit logs, alerting etc.
+Criticial user journeys shouldnt depend on an unrecoverable SPOF. And if we have to (cos theres always SPOFs somewhere in real life syste ms), it needs to be explicitly accepted and made known.  Such as for a startup prototype, 1 postgres instance may be fine but for banks then youll need backups, failover, audit logs, alerting etc.
 
 
 ## Business > Product > Architecture > Ops
