@@ -1,7 +1,7 @@
 ---
 title: AWS Certified AI Practitioner
 date: 2026-05-27
-summary: Continuing the system design studies
+summary: My notes for passing the cert
 tags:
   - ai
   - aws
