@@ -99,6 +99,15 @@ a {
 }
 
 .headline,
+.panel h2,
+.feed-item h3,
+.post-card h2,
+.archive-item h2,
+.post-section h2,
+.post-body h2,
+.post-body h3,
+.post-body h4,
+.post-body h5,
 .blog-layout h1,
 .post-layout h1 {
   font-family: Georgia, 'Times New Roman', serif;
@@ -369,6 +378,18 @@ a {
   padding: 24px;
 }
 
+.blog-post-card {
+  display: grid;
+  grid-template-columns: minmax(156px, 0.34fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+  padding: 18px;
+}
+
+.blog-post-card[hidden] {
+  display: none;
+}
+
 .post-card h2,
 .post-layout h1 {
   margin: 8px 0 14px;
@@ -376,6 +397,18 @@ a {
 
 .post-card h2 {
   font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+}
+
+.post-card-media {
+  display: block;
+  min-height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-card-body {
+  min-width: 0;
+  padding: 8px 6px 8px 0;
 }
 
 .post-cover,
@@ -387,13 +420,57 @@ a {
 }
 
 .post-cover {
-  aspect-ratio: 16 / 9;
-  margin-bottom: 16px;
+  height: 100%;
+  min-height: 164px;
+  aspect-ratio: 4 / 3;
 }
 
 .post-hero {
   max-height: 420px;
   margin: 8px 0 18px;
+}
+
+.post-cover-placeholder {
+  position: relative;
+  display: grid;
+  min-height: 164px;
+  height: 100%;
+  place-items: end start;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(233, 38, 30, 0.12), transparent 38%),
+    linear-gradient(160deg, rgba(32, 36, 35, 0.08), rgba(255, 255, 255, 0.08));
+}
+
+.post-cover-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+.post-cover-placeholder::after {
+  content: '';
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  right: -22px;
+  top: -20px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  transform: rotate(18deg);
+}
+
+.post-cover-placeholder span {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 18px 18px;
+  max-width: calc(100% - 36px);
+  color: var(--heading);
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
 }
 
 .post-card h2 a {
@@ -528,6 +605,7 @@ a {
 
 .post-body {
   margin-top: 30px;
+  counter-reset: article-h2;
 }
 
 .inline-link {
@@ -595,6 +673,34 @@ a {
 
   .blog-toolbar {
     flex-direction: column;
+  }
+
+  .blog-post-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 16px;
+  }
+
+  .post-card-body {
+    padding: 0;
+  }
+
+  .post-card-media,
+  .post-cover,
+  .post-cover-placeholder {
+    min-height: 0;
+  }
+
+  .post-cover,
+  .post-cover-placeholder {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  .blog-post-card .post-cover {
+    max-height: 260px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.08);
   }
 
 }
@@ -720,17 +826,69 @@ a {
   scroll-margin-top: 100px;
 }
 
+.post-body h2 {
+  counter-increment: article-h2;
+  counter-reset: article-h3;
+  margin-top: 48px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--article-line);
+  font-size: clamp(1.65rem, 2.8vw, 2.15rem);
+  line-height: 1.18;
+}
+
 .post-body h3 {
-  margin-top: 28px;
-  margin-bottom: 12px;
-  font-size: clamp(1.25rem, 2.1vw, 1.5rem);
+  counter-increment: article-h3;
+  counter-reset: article-h4;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: clamp(1.12rem, 1.8vw, 1.32rem);
+  line-height: 1.35;
+  color: var(--article-link);
+}
+
+.post-body h4 {
+  counter-increment: article-h4;
+  counter-reset: article-h5;
+}
+
+.post-body h5 {
+  counter-increment: article-h5;
+}
+
+.post-body h2::before,
+.post-body h3::before,
+.post-body h4::before,
+.post-body h5::before {
+  margin-right: 0.45em;
+  color: var(--article-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.post-body h2::before {
+  content: counter(article-h2) ".";
+}
+
+.post-body h3::before {
+  content: counter(article-h2) "." counter(article-h3) ".";
+}
+
+.post-body h4::before {
+  content: counter(article-h2) "." counter(article-h3) "." counter(article-h4) ".";
+}
+
+.post-body h5::before {
+  content: counter(article-h2) "." counter(article-h3) "." counter(article-h4) "." counter(article-h5) ".";
 }
 
 .post-body h4,
 .post-body h5 {
   margin-top: 22px;
-  margin-bottom: 10px;
-  font-size: clamp(1.08rem, 1.9vw, 1.22rem);
+  margin-bottom: 8px;
+  font-size: clamp(1.04rem, 1.65vw, 1.15rem);
+  line-height: 1.4;
+  color: var(--article-heading);
 }
 
 .post-body-html> :not(img):not(figure):not(.code-block):not(.embed-frame):not(iframe):not(video) {

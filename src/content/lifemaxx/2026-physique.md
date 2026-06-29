@@ -47,62 +47,15 @@ i will update this section at the end of the year to post the "after photo" to s
 
 Long term consistency trumps short term intensity -- Bruce Lee
 
-imo the best weight training is the one that'll get you consistent. engaging in researching whats the most optimal workout to look "shredded", or "balanced", or a guide to look like some lame "alpha male" tiktok bros admire will just lead you down to a rabbithole of rumination instead of execution
+imo the best training routine is **the one that'll get you consistent** 
 
-look at my physique on the pic above, i got there from working out just 1-2x a week simply by increasing the weights. progressive overload over months and eating enough protein was enough. consistency works.
+engaging in researching what is the most optimal workout to look "shredded", or "balanced", or a to look like some hollywood/athlete/MMA icon you admire will just lead you down to a rabbithole of rumination instead of execution
 
-<ul>
-  <li>🦍🛡️ Monday - Upper Body</li>
-  <ul>
-    <li>Barbell Incline Bench Press 3x5</li>
-    <li>Weighted Chin Ups 3x4</li>
-    <li>Barbell Overhead Press 3x8</li>
-    <li>Dumbbell Zottman Curls 3x8</li>
-    <li>Cable Rope Tricep Extensions 3x8</li>
-    <li>Cable Rope Ab Crunch 3x8</li>
-    <li>Farmer Carries 2x60 seconds</li>
-  </ul>
-  <li><b>Tuesday - REST</b></li>
-  <ul>
-    <li>STRETCHING</li>
-    <li>Weighted Neck Curls 3x12-20 each side</li>
-    <li>Fascia, shoulder, hamstring stretches</li>
-  </ul>
-  <li>🦵🐎 Wednesday - Lower Body</li>
-  <ul>
-    <li>Barbell Deadlift 3x5</li>
-    <li>Copenhagen Side Plank 3x30 seconds</li>
-    <li>Dumbbell Split Squat 3x8</li>
-    <li>Dumbbell Curls 3x8</li>
-    <li>Dumbbell Calf Raises 3x15</li>
-    <li>Dumbbell Pullover 3x12</li>
-  </ul>
-  <li><b>Thursday - REST</b></li>
-  <ul>
-    <li>Weighted Neck Curls 3x12-20 each side</li>
-    <li>Plyometrics: Pogo Jumps 5x10, 1-Leg Hops 5x4, Skater Jumps 5x5</li>
-    <li>Copenhagen Side Plank 3x30 seconds</li>
-  </ul>
-  <li>🏋️‍♂️⚔️ Friday - Full Body</li>
-  <ul>
-    <li>Barbell Squat 3x5</li>
-    <li>Barbell Hip Thrust 3x8</li>
-    <li>Barbell Romanian Deadlift 3x8</li>
-    <li>Barbell Overhead Press 3x4</li>
-    <li>Dumbbell Chest Supported Row 3x8</li>
-    <li>Dumbbell Incline Bench Press 3x8</li>
-  </ul>
-  <li>Saturday</li>
-  <ul>
-    <li>Judo (3 hours)</li>
-  </ul>
-  <li>Sunday</li>
-  <ul>
-    <li>Judo (3 hours)</li>
-  </ul>
-</ul>
+look at my physique on the pic above, i got there from working out just 1-2x a week simply by increasing the weights. progressive overload over months and eating enough protein was enough
 
-## the protocol
+optimize for consistency always
+
+the following is the routine i can stick by because for me as someone who lifts at his home gym i find it easy to follow
 
 ### Chest day
 
@@ -110,6 +63,7 @@ look at my physique on the pic above, i got there from working out just 1-2x a w
 - Incline Dumbbell Bench - 5x8
 - Dumbbell Lateral Raise - 4x12-20
 - Pushups to 100 reps
+- Ab Wheel 4x8
 
 ### Back day
 
@@ -121,7 +75,7 @@ look at my physique on the pic above, i got there from working out just 1-2x a w
 
 ### Squat day
 
-- Barbell Squat 4x5
+- Barbell Back/Zercher Squat 4x5
 - Dumbbell Lunge/Split Squat 4x10
 - Cable Rope Ab Crunch 4x8
 - Dumbbell Lateral Raise 4x12-20
@@ -138,16 +92,21 @@ look at my physique on the pic above, i got there from working out just 1-2x a w
 - Barbell Deadlift 2x5
 - Barbell Hip Thrust 4x8
 - Kettlebell Swing EMOM, target at least 10 minutes
+- Hanging Leg Raises 3xAMRAP
 
 ### Weekends
 
 - Judo 3 hours/day
 
+i like it as its based on the setup of my home gym. it does not require me much movement around the gym like racking of weights or switching to a different bar/location which i find is a big factor in making me lazy at working out. like for example just did a deadlift? well since the barbell is already in the ground, why not take some plates off then do a hip thrusts since the barbell's already there.
+
+
 
 ## what i like
 
 - **lift days**: 3+ days of lifting is actually **A LOT** if youre also doing sports. personally I am not consistently chasing PRs anyway and mostly doing hypertrophy loads. i know my body well enough when to deload and take breaks. 
-- **sports**: for athleticism. currently I like having Judo as core, then dropping in for BJJ, boxing, or tennis sessions whenever I want
+- **injury proofing via depth**: if youre lifting, go deep, like do deep lunges,  or incline dumbbell benches more than incline barbells. deep weighted reps builds the necessary strength in your tendons to handle real world output like MMA or judo. injuries in sports happen because you didnt bulletproof your tissues enough at that range of motion. but still remember to always load the right amount of weight you can handle.
+- **do sports**: for athleticism. I like having Judo as core, then dropping in for BJJ, boxing, or tennis sessions whenever I want
 - **decompress spine after a heavy lift**: right after the morning workout, do dead hangs or some form of stretch to negate some pressure in the discs of your spine after a heavy compound lift. its just injury proofing so you wont have some disc to slip hours later while youre doing MMA/BJJ. also, decompressing feels good, i like hanging from my pull up bar, i just do 3-4 sets of 60 seconds. if you want something more active, swimming is 10/10 for decompressing the spine.
 - **play with squats variation**: a zercher squat is better for the spine and builds up the core quite well for grappling sports
 - **sports vs lifting in AM/PM**: when choosing which to do first, always lift in the morning then do the sports later in the day. If you do a 3-hour BJJ class in the morning, you will fatigue the hell out of your CNS and stabilizer muscles needed for lifting, and that will make you more prone to injury. meanwhile if you lift heavy in the morning, you'll find that you can still do a good zone 2 run, or BJJ/MMA training later in the day. basically:
@@ -196,11 +155,11 @@ tennis teaches you things you wont see while training judo or jiu jitsu, things 
 
 <img src="https://pbs.twimg.com/media/HHMkQGVakAAC3RT?format=jpg&amp;name=medium" height="300" alt="tennis inspiration" />
 
-tennis = youth. being springy is sex appeal, and its a fun way to awaken the human instinct to throw, track, chase, intercept, and smash an object - which in this case, is flying at a speed of over 100 kilometers an hour.
+explosiveness = youth. being springy is sex appeal. sports like tennis are a fun way to awaken the human instinct to throw, track, chase, intercept, and smash an object - which in this case, is flying at a speed of over 100 kilometers an hour.
 
 i highly recommend some modality to your training. like an MMA/jiu-jitsu athlete adding sprints or assault bikes to his lifestyle to have better explosiveness and fight stamina
 
-be multimodal. especially today where the trend is people becomming multi-dimensional, like hybrid athletes. the world has rejected the one stat athlete, AI has killed the pursuit of the PhD and given rise to people who can execute multi capabilities, like the cardiologist (Michał Nedoszytko MD, PhD) who can code and beat 13,000+ developers at a recent hackathon by Anthropic. it is [the age of the multi-dimensionally jacked](https://www.youtube.com/watch?v=kf77tEkkzvE)
+be multimodal
 
 ## you need to get jacked
 
