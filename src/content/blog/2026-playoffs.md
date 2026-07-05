@@ -4,9 +4,15 @@ date: 2026-04-22
 summary: whats on my 2026 skillmaxxing protocol
 tags:
   - skillmaxxing
+coverImage: https://avatars.githubusercontent.com/u/163702070?v=4
 ---
 
-I'll update this from time to time
+I will update this blog post from time to time
+
+## Public artifacts?
+
+A hustle should come out with some artifacts as proof I went through the fire. Thus I will post some of these on my github at [https://github.com/xjpa/](https://github.com/xjpa/), while some of these I'll just write about on this site
+
 
 ## Build a toy OS (Operating System)
 
@@ -31,10 +37,28 @@ Then build actual systems to implement the learning.
 
 These together provide a good baseline competence to build from to tackle more complex systems and imo is great at opening doors in a world where everyone is just LARPing about being an expert. The certificate so you can get searched, then a deployed system to get believed.
 
+## Microsoft certificates
+
+Free certificates?
+
+Hanging out at [reddit.com/r/azurecertification](https://reddit.com/r/azurecertification), I learned that microsoft has events where I could get either a 50% or a full 100% free voucher for any certificate exam, which usually cost around $150 each exam
+
+So I thought why not hustle for some microsoft certs? I'm feeling fresh and optimistic about this year, so why not grind when I get vouchers for 100% free cert exams? 
+
+I am targeting either cloud, security, or ai-related certs for career visibility
+
 
 ## System Design Projects
 
 The goal is to learn software system design going from Business -> Product -> Sofware Architecture viewpoints, and be competent enough to implement prototypes down to the low level (coding) implementation. 
+
+## Get good at infra and devops
+
+I came across [this post](https://x.com/iximiuz/status/1995122289747046852) about a hands-on/real world exercise based course on learning devops from basic linux to kubernetes and it made me think this is possible to learn on the side. I'm thinking of buying a year's worth of subscription
+
+## Implement an AI paper
+
+The best case is implementing an AI paper recently published in NeurIPS/NIPS or whatever big confference
 
 ## addendum
 

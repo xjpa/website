@@ -30,7 +30,6 @@ const toc = buildToc(headings);
     <a class="inline-link" href="/blog">← Back to blog</a>
     <p class="post-date">{formatDate(post.data.date)}</p>
     <h1>{post.data.title}</h1>
-    {post.data.coverImage ? <img class="post-hero" src={post.data.coverImage} alt={post.data.title} /> : null}
     <p class="about-copy">{post.data.summary}</p>
     <div class="tag-row">
       {post.data.tags.map((tag: string) => <a class="tag tag-link" href={`/blog?tag=${encodeURIComponent(tag)}`}>{tag}</a>)}

@@ -17,6 +17,10 @@ const tagFilters = [{ label: 'All', count: posts.length }].concat(
     .sort((left, right) => left[0].localeCompare(right[0]))
     .map(([label, count]) => ({ label, count })),
 );
+
+function getThumbnailLabel(tags: string[]) {
+  return tags[0] ?? 'notes';
+}
 ---
 
 <BaseLayout
@@ -49,19 +53,33 @@ const tagFilters = [{ label: 'All', count: posts.length }].concat(
 
     <div class="posts-grid" data-posts-grid>
       {
-        posts.map((post) => (
-          <article class="post-card" data-post-card data-tags={post.data.tags.join('|')}>
-            <p class="post-date">{formatDate(post.data.date)}</p>
-            <h2>
-              <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
-            </h2>
-            {post.data.coverImage ? <img class="post-cover" src={post.data.coverImage} alt={post.data.title} /> : null}
-            <p>{post.data.summary}</p>
-            <div class="tag-row">
-              {post.data.tags.map((tag: string) => <a class="tag tag-link" href={`/blog?tag=${encodeURIComponent(tag)}`}>{tag}</a>)}
-            </div>
-          </article>
-        ))
+        posts.map((post) => {
+          const thumbnailLabel = getThumbnailLabel(post.data.tags);
+
+          return (
+            <article class="post-card blog-post-card" data-post-card data-tags={post.data.tags.join('|')}>
+              <a class="post-card-media" href={`/blog/${post.slug}/`} aria-label={post.data.title}>
+                {post.data.coverImage ? (
+                  <img class="post-cover" src={post.data.coverImage} alt="" loading="lazy" />
+                ) : (
+                  <span class="post-cover-placeholder" aria-hidden="true">
+                    <span>{thumbnailLabel}</span>
+                  </span>
+                )}
+              </a>
+              <div class="post-card-body">
+                <p class="post-date">{formatDate(post.data.date)}</p>
+                <h2>
+                  <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+                </h2>
+                <p>{post.data.summary}</p>
+                <div class="tag-row">
+                  {post.data.tags.map((tag: string) => <a class="tag tag-link" href={`/blog?tag=${encodeURIComponent(tag)}`}>{tag}</a>)}
+                </div>
+              </div>
+            </article>
+          );
+        })
       }
     </div>
   </section>

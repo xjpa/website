@@ -1,5 +1,5 @@
 ---
-title: masters in IT
+title: masters degree
 summary: formal education on software systems design and engineering, business durability, and enterprise operations
 links: []
 ---
@@ -14,24 +14,5 @@ The beauty of grad school is your coursework is based on your taste, you can dec
 4. **Advanced Systems Design**: we explored different stages of the design process in software engineering. For coursework, I did system design with AWS, focused on the design of a search engine deployed to AWS. Then for the final project, I designed an e-commerce-like system.
 5. **Shared & Collaborative Systems**: research-oriented class, mostly exploring various tech products from a human-computer interaction and business perspective. My project was extending LLM-based misinformation simulations into a governance digital twin for shared collaborative systems, basically designing an AI agent governance platform.
 6. **Project Management**: loads of case studies. I didnt get much out of it because the class time coincided with my work hours. A massive shame as the course offered PMBOK certifications.
+7. **Machine Learning**:
 
-## why masters in IT
-
-Initially I chose to do a Masters in Computer Science.
-
-A Masters in Information Technology is usually about how to make tech work in an organization, covering system design, management, and enterprise transformation, a closer executive track.
-
-Thats why I enrolled over an MS Computer Science, hedging on a bet that in the AI age, where anyone can now deepen their tech skillset without a formal masters degree, taking a masters in the following are better than nicheing yourself:
-
-1. business/people-oriented masters
-2. domain expansive masters
-
-With AI, skilling yourself technically isnt a big challenge, just do some projects or grind a book. There is no need to take an advanced algorithms class present in MS CS when I can just solve some algorithmic problems at leetcode or kattis. What you need is that **cross disciplinary thinking**, having a broad view.
-
-> Because the goal is not to become a code monkey
-
-Silo-ing your expertise to a corner where you are competing with a machine or a human with better access to compute or AI models is a rat race thats only enticing if youre early in your career. The only way to succeed in the industry is to move up the abstraction layer and be the one influencing the path of engineering: system design, product thinking, cross-organizational influence, solutions engineering, roadmap and delivery planning.
-
-Masters in IT covers a good enough broad view of the intersection between business and tech execution, and I can always just add electives later to deepen myself in the technical details.
-
-I'll just take a business-oriented masters like an MBA as my second masters later, or a domain-expansive masters like computational finance or whatever interesting niche I'll come across later that I want to embed and apply my technical skills into.
