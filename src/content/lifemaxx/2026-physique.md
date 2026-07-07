@@ -124,6 +124,18 @@ i like it as its based on the setup of my home gym. it does not require me much 
   - **cut:** cutting is easy. vegan protein is good if i want to cut, you can eat like sardines (~18g protein) mixed with 75g TVP/textured vegan protein (~38g protein) in 1 sitting. another is eggs, its very easy to eat 5 eggs in 1 sitting (~30g protein), usually i take it as a snack after breakfast and it takes me like 7 minutes to chow 5 eggs. those 2 (5 eggs and mix of TVP+sardines) combined is already ~80g protein and ~930g calories, which unless you weigh more than 180 lbs, that'd already be at least 60% of the daily protein intake you need to grow your muscle. you can literally just eat a couple bananas, then a burger or chicken and rice, and a protein shake and thats it for the rest of the day.
   - **bulk:** bulking is whats hard. especially for a hard gainer like me, you got no choice but to really track your diet. to bulk, peanut butter sandwiches, oatmeal, and liquid calories are the main weapons. lactose free milk. sugar free bread for bulking, it provides 2x more calories and a 200g white bread (roughly 4-5 slices) will give 16-20g protein while 200g rice  would be only 5g.
 
+
+## diet
+
+4 meals a day
+
+heres a sample of what i use
+
+- breakfast: whatever meal is in the office (free food, usually rice, eggs, fish)
+- lunch: chicken breast 200g
+- workout:
+- dinner:
+
 ## athleticism
 
 i dont believe in "functional weightlifting/fitness" trends that try to make you look athletic. imo if you want to be athletic, then just pick up a real activity
