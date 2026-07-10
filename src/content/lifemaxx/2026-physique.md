@@ -131,10 +131,10 @@ i like it as its based on the setup of my home gym. it does not require me much 
 
 heres a sample of what i use
 
-- breakfast: whatever meal is in the office (free food, usually rice, eggs, fish)
-- lunch: chicken breast 200g
-- workout:
-- dinner:
+- breakfast: whatever meal is in the office (free food, usually served with eggs and rice)
+- lunch: tuna, eggs, vegetables especially brocolli, add soy  (like TVP) for more protein
+- pre-workout: usually sandwiches or a small rice meal for carbs
+- dinner: chicken breast 200g
 
 ## athleticism
 
