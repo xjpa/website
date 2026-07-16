@@ -55,9 +55,11 @@ look at my physique on the pic above, i got there from working out just 1-2x a w
 
 optimize for consistency always
 
-the following is the routine i can stick by because for me as someone who lifts at his home gym i find it easy to follow
+### Judo focused
 
-### Chest day
+the following is the routine i mostly stick by because for me as someone who lifts at his home gym i find it easy to follow
+
+#### Chest day
 
 - Incline Barbell Bench - 3x5
 - Incline Dumbbell Bench - 5x8
@@ -65,7 +67,7 @@ the following is the routine i can stick by because for me as someone who lifts 
 - Pushups to 100 reps
 - Ab Wheel 4x8
 
-### Back day
+#### Back day
 
 - Weighted Neutral Grip Pullup 3x5
 - Chest Supported Single Arm Dumbbell Row 3x5
@@ -73,34 +75,67 @@ the following is the routine i can stick by because for me as someone who lifts 
 - Dumbbell Rear Delt Flye 3x12-20
 - Dumbbell Farmer Carry to Shrug superset
 
-### Squat day
+#### Squat day
 
 - Barbell Back/Zercher Squat 4x5
 - Dumbbell Lunge/Split Squat 4x10
 - Cable Rope Ab Crunch 4x8
 - Dumbbell Lateral Raise 4x12-20
 
-### Arms day
+#### Arms day
 
 - Chinups 3 sets to failure
 - Barbell Overhead Press 3x5
 - Dumbbell Zottman Curls 4x8
 - Cable Rope Tricep Extension 4x8
 
-### Hinge day
+#### Hinge day
 
 - Barbell Deadlift 2x5
 - Barbell Hip Thrust 4x8
 - Kettlebell Swing EMOM, target at least 10 minutes
 - Hanging Leg Raises 3xAMRAP
 
-### Weekends
+#### Weekends
 
-- Judo 3 hours/day
+- 2x Judo @ 3 hours per class
 
 i like it as its based on the setup of my home gym. it does not require me much movement around the gym like racking of weights or switching to a different bar/location which i find is a big factor in making me lazy at working out. like for example just did a deadlift? well since the barbell is already in the ground, why not take some plates off then do a hip thrusts since the barbell's already there.
 
+### Judo x BJJ routine
 
+when i feel like doing sports training 3-4x a week, I reduce the lift days to 3
+
+#### Judo and BJJ training
+
+- Judo: Weekends (Sat, Sun), 1-2x a week
+- BJJ: Weekdays (Tues, Thurs), 1-2x a week
+- Do quick abs/core work during judo/bjj days
+
+#### Lift Day 1
+
+- Deadlift 3x5
+- Barbell Shrugs 3 sets to Failure
+- Incline Barbell Bench 3x5
+- Incline Dumbbell Bench 4x10
+- Pushups 2 sets to Failure
+- Dumbbell Lateral Raises 3x12-20
+
+#### Lift Day 2
+
+- Pullups 2 sets to Failure
+- Squat 3x5
+- Barbell Hip Thrust 4x8
+- Chest Supported Dumbbell Row 5x8
+- Dumbbell Lateral Raises 3x12-20
+
+#### Lift Day 3
+
+- Weighted Neutral Grip Pullup 3 sets to Failure
+- Barbell Overhead Press 3x5
+- Dumbbell Curls 3x8
+- Cable Rope Tricep Extension 4x8
+- Dumbbell Rear Delt Raises 4x12-20
 
 ## what i like
 
