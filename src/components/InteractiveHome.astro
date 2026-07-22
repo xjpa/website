@@ -55,7 +55,7 @@ const projects = (await getCollection('projects')).sort((left, right) =>
 
         <div class="particle-copy">
           <div class="particle-message particle-message-one">
-            <h1 id="particle-title">Most things<br />begin as noise.</h1>
+            <h1 id="particle-title">Most things<br />begin as noise</h1>
           </div>
           <div class="particle-message particle-message-two" aria-hidden="true">
             <h1>I turn patterns<br />into systems.</h1>
@@ -64,6 +64,7 @@ const projects = (await getCollection('projects')).sort((left, right) =>
         </div>
 
       </div>
+      <span class="mobile-story-checkpoint" aria-hidden="true"></span>
     </section>
 
     <section class="home-preview" aria-label="Homepage preview">
@@ -241,8 +242,8 @@ const projects = (await getCollection('projects')).sort((left, right) =>
             return;
           }
 
-          const firstMessage = 1 - smoothstep(0.24, 0.43, scrollProgress);
-          const secondMessage = smoothstep(0.36, 0.54, scrollProgress);
+          const firstMessage = 1 - smoothstep(0.52, 0.67, scrollProgress);
+          const secondMessage = smoothstep(0.6, 0.74, scrollProgress);
           const promptFade = 1 - smoothstep(0.82, 0.96, scrollProgress);
           story.style.setProperty('--message-one', firstMessage.toFixed(4));
           story.style.setProperty('--message-two', secondMessage.toFixed(4));
@@ -274,6 +275,7 @@ const projects = (await getCollection('projects')).sort((left, right) =>
               mobileMessageRequested
               && mobileMessageStartedAt === 0
               && introProgress >= 0.9
+              && scrollProgress >= 0.56
             ) {
               mobileMessageStartedAt = time + 250;
             }

@@ -145,10 +145,38 @@
     linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 100%);
 }
 
+.mobile-story-checkpoint {
+  display: none;
+}
+
 @media (max-width: 700px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+
   .particle-story {
-    height: 320vh;
-    height: 320svh;
+    height: 240vh;
+    height: 240svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .mobile-story-checkpoint {
+    position: absolute;
+    top: 100vh;
+    top: 100svh;
+    left: 0;
+    display: block;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .home-preview {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .particle-header {
