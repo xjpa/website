@@ -398,5 +398,25 @@ const projects = (await getCollection('projects')).sort((left, right) =>
         window.addEventListener('pagehide', () => cancelAnimationFrame(raf), { once: true });
       }
     </script>
+
+    <script is:inline>
+      const protectedMedia = 'img, canvas';
+
+      document.querySelectorAll('img').forEach((image) => {
+        image.draggable = false;
+      });
+
+      document.addEventListener('contextmenu', (event) => {
+        if (event.target instanceof Element && event.target.closest(protectedMedia)) {
+          event.preventDefault();
+        }
+      });
+
+      document.addEventListener('dragstart', (event) => {
+        if (event.target instanceof Element && event.target.closest(protectedMedia)) {
+          event.preventDefault();
+        }
+      });
+    </script>
   </body>
 </html>
