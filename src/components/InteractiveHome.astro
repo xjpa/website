@@ -115,6 +115,7 @@ const projects = (await getCollection('projects')).sort((left, right) =>
       const canvas = story?.querySelector<HTMLCanvasElement>('.particle-canvas');
       const source = story?.dataset.imageSrc;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mobileNarrative = window.matchMedia('(max-width: 700px)');
 
       if (story && canvas && source) {
         const context = canvas.getContext('2d', { alpha: false });
@@ -136,6 +137,9 @@ const projects = (await getCollection('projects')).sort((left, right) =>
         let height = 0;
         let renderRatio = 1;
         let scrollProgress = reducedMotion ? 0.8 : 0;
+        let introStartedAt = 0;
+        let mobileMessageRequested = false;
+        let mobileMessageStartedAt = 0;
         let raf = 0;
 
         const clamp = (value: number, min = 0, max = 1) =>
@@ -229,6 +233,14 @@ const projects = (await getCollection('projects')).sort((left, right) =>
         const updateScroll = () => {
           const bounds = story.getBoundingClientRect();
           scrollProgress = clamp(-bounds.top / Math.max(1, bounds.height - window.innerHeight));
+
+          if (mobileNarrative.matches && !reducedMotion) {
+            if (scrollProgress > 0.015) mobileMessageRequested = true;
+            const promptFade = 1 - smoothstep(0.88, 0.98, scrollProgress);
+            story.style.setProperty('--prompt-fade', promptFade.toFixed(4));
+            return;
+          }
+
           const firstMessage = 1 - smoothstep(0.24, 0.43, scrollProgress);
           const secondMessage = smoothstep(0.36, 0.54, scrollProgress);
           const promptFade = 1 - smoothstep(0.82, 0.96, scrollProgress);
@@ -250,20 +262,61 @@ const projects = (await getCollection('projects')).sort((left, right) =>
           const seconds = time * 0.001;
           const centerX = width * 0.5;
           const centerY = height * 0.56;
+          const introProgress = reducedMotion
+            ? 1
+            : smoothstep(0, 1, (time - introStartedAt) / 1600);
+          const introCopy = smoothstep(0.56, 0.9, introProgress);
+
+          story.style.setProperty('--intro-copy', introCopy.toFixed(4));
+
+          if (mobileNarrative.matches && !reducedMotion) {
+            if (
+              mobileMessageRequested
+              && mobileMessageStartedAt === 0
+              && introProgress >= 0.9
+            ) {
+              mobileMessageStartedAt = time + 250;
+            }
+
+            const mobileMessageProgress = mobileMessageStartedAt === 0
+              ? 0
+              : smoothstep(0, 1, (time - mobileMessageStartedAt) / 560);
+            story.style.setProperty('--message-one', (1 - mobileMessageProgress).toFixed(4));
+            story.style.setProperty('--message-two', mobileMessageProgress.toFixed(4));
+          }
 
           for (const particle of particles) {
+            const radialDistance = Math.hypot(
+              (particle.x - centerX) / Math.max(1, width * 0.7),
+              (particle.y - centerY) / Math.max(1, height * 0.82),
+            );
+            const revealStart = Math.min(0.72, radialDistance * 0.62);
+            const particleReveal = smoothstep(
+              revealStart,
+              Math.min(1, revealStart + 0.26),
+              introProgress,
+            );
             const waveX = Math.sin(seconds * 0.72 + particle.phase) * 3.1 * particle.depth * motion;
             const waveY = Math.cos(seconds * 0.56 + particle.phase * 0.81) * 2.5 * particle.depth * motion;
             const parallaxX = pointer.x * 12 * (particle.depth - 0.7) * motion;
             const parallaxY = pointer.y * 9 * (particle.depth - 0.7) * motion;
             const imageX = centerX + (particle.x - centerX) * zoom;
             const imageY = centerY + (particle.y - centerY) * zoom;
-            const x = imageX + particle.scatterX * scatter + waveX + parallaxX;
-            const y = imageY + particle.scatterY * scatter + waveY + parallaxY;
+            const revealScale = 0.88 + particleReveal * 0.12;
+            const x = centerX
+              + (imageX - centerX) * revealScale
+              + particle.scatterX * scatter
+              + waveX
+              + parallaxX;
+            const y = centerY
+              + (imageY - centerY) * revealScale
+              + particle.scatterY * scatter
+              + waveY
+              + parallaxY;
             const pulse = 0.9 + Math.sin(seconds * 0.85 + particle.phase) * 0.1 * motion;
             const radius = particle.size * particle.depth * pulse * (1.06 - focus * 0.22);
 
-            particleContext.globalAlpha = 0.86 + particle.depth * 0.09;
+            particleContext.globalAlpha = particleReveal * (0.86 + particle.depth * 0.09);
             particleContext.fillStyle = particle.color;
             particleContext.beginPath();
             particleContext.arc(x, y, radius, 0, Math.PI * 2);
@@ -325,6 +378,7 @@ const projects = (await getCollection('projects')).sort((left, right) =>
         image.addEventListener('load', () => {
           resize();
           updateScroll();
+          introStartedAt = performance.now();
           if (reducedMotion) {
             render(0);
           } else {
