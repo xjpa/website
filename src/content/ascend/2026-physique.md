@@ -5,14 +5,14 @@ summary: Locking in on a lean bulk, better training structure, and a year-end up
 tags:
   - Physique
   - Training
-  - Lifemaxx
+  - Ascend
 ---
 
 ## march 5, 2026
 
 the following is a pic of me
 
-<img src="/images/lifemaxx/2026/physique/physique.jpeg" alt="mirror selfie of me" />
+<img src="/images/ascend/2026/physique/physique.jpeg" alt="mirror selfie of me" />
 
 i look meh, poverty abs.
 

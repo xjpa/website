@@ -13,7 +13,7 @@ const blog = defineCollection({
   schema: datedEntrySchema,
 });
 
-const lifemaxx = defineCollection({
+const ascend = defineCollection({
   type: 'content',
   schema: datedEntrySchema,
 });
@@ -34,4 +34,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, lifemaxx, projects };
+export const collections = { ascend, blog, projects };

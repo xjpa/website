@@ -1,5 +1,4 @@
 :root {
-  color-scheme: dark;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   line-height: 1.6;
   font-weight: 400;
@@ -9,18 +8,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --bg: #f7f4ee;
-  --bg-top: #fffbf2;
-  --bg-soft: rgba(32, 36, 35, 0.04);
-  --line: rgba(32, 36, 35, 0.12);
-  --text: #202423;
-  --muted: #4d5654;
-  --accent: #e9261e;
-  --dot: #ff0100;
-  --heading: #202423;
-  --glow: rgba(255, 255, 255, 0.72);
-  --grid: rgba(32, 36, 35, 0.12);
-  --shadow: rgba(32, 36, 35, 0.08);
 }
 
 * {
@@ -41,7 +28,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--link);
   text-decoration-color: color-mix(in srgb, var(--text) 50%, transparent);
   text-underline-offset: 0.24em;
 }

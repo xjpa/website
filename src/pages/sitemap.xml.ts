@@ -7,9 +7,9 @@ function toUrl(pathname: string) {
 }
 
 export const GET: APIRoute = async () => {
-  const [blog, lifemaxx, projects] = await Promise.all([
+  const [ascend, blog, projects] = await Promise.all([
+    getCollection('ascend'),
     getCollection('blog'),
-    getCollection('lifemaxx'),
     getCollection('projects'),
   ]);
 
@@ -17,9 +17,9 @@ export const GET: APIRoute = async () => {
     '/',
     '/blog',
     '/archive',
-    '/lifemaxx',
+    '/ascend',
     ...blog.map((entry) => `/blog/${entry.slug}`),
-    ...lifemaxx.map((entry) => `/lifemaxx/${entry.slug}`),
+    ...ascend.map((entry) => `/ascend/${entry.slug}`),
     ...projects.map((entry) => `/projects/${entry.slug}`),
   ];
 

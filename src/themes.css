@@ -1,0 +1,72 @@
+/*
+ * Theme presets
+ *
+ * Set `theme` in src/content/site.ts to one of:
+ * - original: the site's previous cream theme
+ * - forest: the green and warm-cream inspiration theme
+ */
+
+:root,
+:root[data-theme='original'] {
+  color-scheme: dark;
+  --bg: #f7f4ee;
+  --bg-top: #fffbf2;
+  --bg-soft: rgba(32, 36, 35, 0.04);
+  --line: rgba(32, 36, 35, 0.12);
+  --text: #202423;
+  --muted: #4d5654;
+  --link: #202423;
+  --accent: #e9261e;
+  --dot: #ff0100;
+  --heading: #202423;
+  --glow: rgba(255, 255, 255, 0.72);
+  --grid: rgba(32, 36, 35, 0.12);
+  --shadow: rgba(32, 36, 35, 0.08);
+}
+
+:root[data-theme='forest'] {
+  color-scheme: dark;
+  --bg: #173d2a;
+  --bg-top: #1d5034;
+  --bg-soft: rgba(255, 255, 255, 0.055);
+  --line: rgba(244, 241, 230, 0.2);
+  --text: #f4f1e6;
+  --muted: #c3d0c5;
+  --link: #e6fff0;
+  --accent: #e59ad4;
+  --dot: #e59ad4;
+  --heading: #ffe49a;
+  --glow: rgba(255, 228, 154, 0.055);
+  --grid: rgba(244, 241, 230, 0.14);
+  --shadow: rgba(5, 22, 13, 0.38);
+}
+
+:root[data-theme='forest'] .post-layout {
+  --article-bg: #1e4931;
+  --article-line: rgba(244, 241, 230, 0.2);
+  --article-text: #f4f1e6;
+  --article-heading: #ffe49a;
+  --article-muted: #c3d0c5;
+  --article-link: #e6fff0;
+  --article-link-hover: #ffffff;
+  --article-tag-bg: rgba(230, 255, 240, 0.07);
+  --article-toc-bg: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 18px 48px rgba(5, 22, 13, 0.32);
+}
+
+:root[data-theme='forest'] .post-layout a {
+  text-decoration-color: rgba(230, 255, 240, 0.45);
+}
+
+:root[data-theme='forest'] .post-layout a:hover {
+  text-decoration-color: rgba(255, 255, 255, 0.58);
+}
+
+:root[data-theme='forest'] .post-layout .tag-link:hover,
+:root[data-theme='forest'] .post-layout .post-body blockquote {
+  background: rgba(230, 255, 240, 0.08);
+}
+
+:root[data-theme='forest'] .post-layout .post-body blockquote {
+  border-left-color: rgba(229, 154, 212, 0.75);
+}

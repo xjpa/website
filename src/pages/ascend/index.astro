@@ -3,17 +3,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { formatDate, sortByDateDesc } from '../../lib/content';
 
-const entries = sortByDateDesc(await getCollection('lifemaxx'));
+const entries = sortByDateDesc(await getCollection('ascend'));
 ---
 
 <BaseLayout
-  title="Lifemaxx | John Amata"
+  title="Ascend | John Amata"
   description="Protocols, experiments, and notes on high-agency living and performance."
-  canonicalPath="/lifemaxx"
+  canonicalPath="/ascend"
 >
   <section class="blog-layout">
     <div class="section-heading">
-      <p class="eyebrow">Lifemaxx</p>
+      <p class="eyebrow">Ascend</p>
       <h1>we must ascend</h1>
       <p class="about-copy">your mind matches the depth of your life</p>
     </div>
@@ -24,7 +24,7 @@ const entries = sortByDateDesc(await getCollection('lifemaxx'));
           <article class="post-card">
             <p class="post-date">{formatDate(entry.data.date)}</p>
             <h2>
-              <a href={`/lifemaxx/${entry.slug}/`}>{entry.data.title}</a>
+              <a href={`/ascend/${entry.slug}/`}>{entry.data.title}</a>
             </h2>
             <p>{entry.data.summary}</p>
             <div class="tag-row">

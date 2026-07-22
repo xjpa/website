@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import { site } from '../content/site';
+import '../themes.css';
 import '../styles.css';
 
 type Props = {
@@ -19,7 +20,7 @@ const canonicalUrl = canonicalPath === '/' ? `${site.url}/` : `${site.url}${cano
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme={site.theme}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

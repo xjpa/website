@@ -1,4 +1,4 @@
-export type LifemaxxEntry = {
+export type AscendEntry = {
   slug: string;
   title: string;
   date: string;

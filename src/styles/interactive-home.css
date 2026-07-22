@@ -1,0 +1,185 @@
+.particle-story {
+  --message-one: 1;
+  --message-two: 0;
+  --prompt-fade: 1;
+
+  position: relative;
+  height: 190vh;
+  color: #f7f4ee;
+  background: #192116;
+}
+
+.particle-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #192116;
+}
+
+.particle-canvas {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.particle-stage::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background:
+    linear-gradient(180deg, rgb(9 14 10 / 0.38), transparent 26%, transparent 65%, rgb(8 12 9 / 0.4)),
+    radial-gradient(circle at center, transparent 44%, rgb(7 11 8 / 0.22));
+}
+
+.particle-header {
+  position: absolute;
+  z-index: 5;
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 4vw, 4rem);
+  left: clamp(1rem, 4vw, 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid rgb(247 244 238 / 0.34);
+  border-radius: 999px;
+  background: rgb(28 41 28 / 0.58);
+  box-shadow: 0 14px 44px rgb(0 0 0 / 0.16);
+  backdrop-filter: blur(12px);
+}
+
+.particle-brand,
+.particle-header nav a {
+  color: #f7f4ee;
+  text-decoration: none;
+}
+
+.particle-brand {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.particle-header nav {
+  display: flex;
+  gap: clamp(0.8rem, 2vw, 1.7rem);
+}
+
+.particle-header nav a {
+  color: rgb(247 244 238 / 0.86);
+  font-size: 0.9rem;
+}
+
+.particle-header a:hover,
+.particle-header a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+}
+
+.particle-copy {
+  position: absolute;
+  z-index: 4;
+  right: clamp(1rem, 7vw, 7rem);
+  bottom: clamp(2rem, 6vh, 5rem);
+  left: clamp(1rem, 7vw, 7rem);
+  display: grid;
+  grid-template-rows: auto auto;
+  pointer-events: none;
+}
+
+.particle-scroll {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  text-transform: uppercase;
+}
+
+.particle-message {
+  grid-row: 1;
+  grid-column: 1;
+  align-self: end;
+}
+
+.particle-message-one {
+  opacity: var(--message-one);
+}
+
+.particle-message-two {
+  opacity: var(--message-two);
+}
+
+.particle-message h1 {
+  max-width: 1100px;
+  margin: 0;
+  color: #f7f4ee;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 8.5rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 0.86;
+  text-shadow: 0 3px 30px rgb(0 0 0 / 0.4);
+}
+
+.particle-scroll {
+  grid-row: 2;
+  margin: 1.45rem 0 0;
+  opacity: var(--prompt-fade);
+  font-size: clamp(0.66rem, 0.84vw, 0.84rem);
+  letter-spacing: 0.12em;
+}
+
+.home-preview {
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, var(--glow), transparent 28%),
+    linear-gradient(180deg, var(--bg-top) 0%, var(--bg) 100%);
+}
+
+@media (max-width: 700px) {
+  .particle-story {
+    height: 170vh;
+  }
+
+  .particle-header {
+    align-items: flex-start;
+    border-radius: 20px;
+  }
+
+  .particle-brand {
+    max-width: 9rem;
+  }
+
+  .particle-header nav {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 0.35rem 0.8rem;
+  }
+
+  .particle-header nav a {
+    font-size: 0.78rem;
+  }
+
+  .particle-copy {
+    bottom: 2.2rem;
+  }
+
+  .particle-message h1 {
+    font-size: clamp(3rem, 16vw, 5.5rem);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle-copy,
+  .particle-canvas {
+    transition: none;
+  }
+}

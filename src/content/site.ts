@@ -1,6 +1,8 @@
 export const site = {
   name: 'John Amata',
   url: 'https://johnamata.com',
+  // Switch between 'original' and 'forest'.
+  theme: 'original' as const,
   accentDot: true,
   title: 'full stack from systems to revenue ',
   intro: [

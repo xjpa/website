@@ -1,0 +1,346 @@
+---
+import { getCollection } from 'astro:content';
+import Header from './Header.astro';
+import PortraitRotator from './PortraitRotator.astro';
+import heroImage from '../assets/slide01.jpg';
+import { site } from '../content/site';
+import '../themes.css';
+import '../styles.css';
+import '../styles/interactive-home.css';
+
+const projects = (await getCollection('projects')).sort((left, right) =>
+  left.data.title.localeCompare(right.data.title),
+);
+---
+
+<!doctype html>
+<html lang="en" data-theme={site.theme}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/eagle.png" />
+    <meta
+      name="description"
+      content={`An interactive point-cloud introduction to ${site.name}.`}
+    />
+    <link rel="canonical" href={`${site.url}/`} />
+    <title>{site.name}</title>
+  </head>
+
+  <body>
+    <section
+      class="particle-story"
+      data-particle-story
+      data-image-src={heroImage.src}
+      aria-labelledby="particle-title"
+    >
+      <div class="particle-stage">
+        <header class="particle-header">
+          <a class="particle-brand" href="/">John Patrick Amata</a>
+          <nav aria-label="Primary navigation">
+            <a href="/">home</a>
+            <a href="/blog">blog</a>
+            <a href="/archive">archive</a>
+            <a href="/ascend">ascend</a>
+          </nav>
+        </header>
+
+        <canvas class="particle-canvas" aria-hidden="true"></canvas>
+
+        <div class="particle-copy">
+          <div class="particle-message particle-message-one">
+            <h1 id="particle-title">Most things<br />begin as noise.</h1>
+          </div>
+          <div class="particle-message particle-message-two" aria-hidden="true">
+            <h1>I turn patterns<br />into systems.</h1>
+          </div>
+          <p class="particle-scroll" aria-hidden="true">[ scroll to resolve ]</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="home-preview" aria-label="Homepage preview">
+      <div class="page-shell">
+        <Header pathname="/" />
+        <main>
+          <section class="hero-grid">
+            <div class="hero-copy">
+              <h1 class="headline">
+                {site.name}
+                {site.accentDot ? <span class="accent-dot">•</span> : null}
+              </h1>
+              <p class="lede">{site.title}</p>
+              {site.intro.map((paragraph) => <p class="intro">{paragraph}</p>)}
+
+              <ul class="links-list">
+                <li>
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
+                </li>
+              </ul>
+
+              <section class="panel">
+                <h2>Side quests.</h2>
+                <ul class="project-list">
+                  {
+                    projects.map((project) => (
+                      <li>
+                        <a class="project-link" href={`/projects/${project.slug}/`}>
+                          {project.data.title}
+                        </a>{' '}
+                        — {project.data.summary}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </section>
+            </div>
+
+            <aside class="hero-art" aria-label="Decorative avatar card">
+              <PortraitRotator />
+            </aside>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <script>
+      const story = document.querySelector<HTMLElement>('[data-particle-story]');
+      const canvas = story?.querySelector<HTMLCanvasElement>('.particle-canvas');
+      const source = story?.dataset.imageSrc;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (story && canvas && source) {
+        const context = canvas.getContext('2d', { alpha: false });
+        const particleLayer = document.createElement('canvas');
+        const particleContext = particleLayer.getContext('2d', { alpha: false });
+        const image = new Image();
+        const pointer = { x: 0, y: 0 };
+        let particles: Array<{
+          x: number;
+          y: number;
+          scatterX: number;
+          scatterY: number;
+          depth: number;
+          phase: number;
+          size: number;
+          color: string;
+        }> = [];
+        let width = 0;
+        let height = 0;
+        let renderRatio = 1;
+        let scrollProgress = reducedMotion ? 0.8 : 0;
+        let raf = 0;
+
+        const clamp = (value: number, min = 0, max = 1) =>
+          Math.min(max, Math.max(min, value));
+
+        const smoothstep = (from: number, to: number, value: number) => {
+          const progress = clamp((value - from) / (to - from));
+          return progress * progress * (3 - 2 * progress);
+        };
+
+        const resize = () => {
+          if (!context || !particleContext || !image.complete || !image.naturalWidth) return;
+
+          const bounds = canvas.getBoundingClientRect();
+          renderRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+          width = bounds.width;
+          height = bounds.height;
+          canvas.width = Math.round(width * renderRatio);
+          canvas.height = Math.round(height * renderRatio);
+          particleLayer.width = canvas.width;
+          particleLayer.height = canvas.height;
+          context.setTransform(renderRatio, 0, 0, renderRatio, 0, 0);
+          particleContext.setTransform(renderRatio, 0, 0, renderRatio, 0, 0);
+
+          const columns = width < 700 ? 66 : 180;
+          const rows = Math.ceil(columns * (height / width));
+          const sampler = document.createElement('canvas');
+          sampler.width = columns;
+          sampler.height = rows;
+          const samplerContext = sampler.getContext('2d', { willReadFrequently: true });
+
+          const sourceRatio = image.naturalWidth / image.naturalHeight;
+          const targetRatio = columns / rows;
+          let sourceX = 0;
+          let sourceY = 0;
+          let sourceWidth = image.naturalWidth;
+          let sourceHeight = image.naturalHeight;
+
+          if (sourceRatio > targetRatio) {
+            sourceWidth = image.naturalHeight * targetRatio;
+            sourceX = (image.naturalWidth - sourceWidth) / 2;
+          } else {
+            sourceHeight = image.naturalWidth / targetRatio;
+            const availableY = image.naturalHeight - sourceHeight;
+            sourceY = availableY * (width > height ? 0.42 : 0.56);
+          }
+
+          samplerContext?.drawImage(
+            image,
+            sourceX,
+            sourceY,
+            sourceWidth,
+            sourceHeight,
+            0,
+            0,
+            columns,
+            rows,
+          );
+
+          const pixels = samplerContext?.getImageData(0, 0, columns, rows).data;
+          if (!pixels) return;
+
+          particles = [];
+          const spacingX = width / columns;
+          const spacingY = height / rows;
+
+          for (let row = 0; row < rows; row += 1) {
+            for (let column = 0; column < columns; column += 1) {
+              const index = (row * columns + column) * 4;
+              const red = pixels[index];
+              const green = pixels[index + 1];
+              const blue = pixels[index + 2];
+              const brightness = (red + green + blue) / 765;
+              const seed = Math.sin((row * columns + column + 1) * 437.31);
+
+              particles.push({
+                x: (column + 0.5) * spacingX,
+                y: (row + 0.5) * spacingY,
+                scatterX: Math.sin(seed * 91.7) * (10 + Math.abs(seed) * 24),
+                scatterY: Math.cos(seed * 73.1) * (8 + Math.abs(seed) * 18),
+                depth: 0.62 + Math.abs(Math.sin(seed * 17.9)) * 0.72,
+                phase: seed * Math.PI * 12,
+                size: Math.max(1.5, spacingX * (0.42 + brightness * 0.3)),
+                color: `rgb(${red} ${green} ${blue})`,
+              });
+            }
+          }
+
+        };
+
+        const updateScroll = () => {
+          const bounds = story.getBoundingClientRect();
+          scrollProgress = clamp(-bounds.top / Math.max(1, bounds.height - window.innerHeight));
+          const firstMessage = 1 - smoothstep(0.24, 0.43, scrollProgress);
+          const secondMessage = smoothstep(0.36, 0.54, scrollProgress);
+          const promptFade = 1 - smoothstep(0.82, 0.96, scrollProgress);
+          story.style.setProperty('--message-one', firstMessage.toFixed(4));
+          story.style.setProperty('--message-two', secondMessage.toFixed(4));
+          story.style.setProperty('--prompt-fade', promptFade.toFixed(4));
+        };
+
+        const render = (time: number) => {
+          if (!context || !particleContext) return;
+
+          particleContext.fillStyle = '#192116';
+          particleContext.fillRect(0, 0, width, height);
+
+          const focus = smoothstep(0.04, 0.78, scrollProgress);
+          const scatter = (1 - focus) * 0.72;
+          const zoom = 1 + focus * 0.075;
+          const motion = 1 - focus * 0.55;
+          const seconds = time * 0.001;
+          const centerX = width * 0.5;
+          const centerY = height * 0.56;
+
+          for (const particle of particles) {
+            const waveX = Math.sin(seconds * 0.72 + particle.phase) * 3.1 * particle.depth * motion;
+            const waveY = Math.cos(seconds * 0.56 + particle.phase * 0.81) * 2.5 * particle.depth * motion;
+            const parallaxX = pointer.x * 12 * (particle.depth - 0.7) * motion;
+            const parallaxY = pointer.y * 9 * (particle.depth - 0.7) * motion;
+            const imageX = centerX + (particle.x - centerX) * zoom;
+            const imageY = centerY + (particle.y - centerY) * zoom;
+            const x = imageX + particle.scatterX * scatter + waveX + parallaxX;
+            const y = imageY + particle.scatterY * scatter + waveY + parallaxY;
+            const pulse = 0.9 + Math.sin(seconds * 0.85 + particle.phase) * 0.1 * motion;
+            const radius = particle.size * particle.depth * pulse * (1.06 - focus * 0.22);
+
+            particleContext.globalAlpha = 0.86 + particle.depth * 0.09;
+            particleContext.fillStyle = particle.color;
+            particleContext.beginPath();
+            particleContext.arc(x, y, radius, 0, Math.PI * 2);
+            particleContext.fill();
+          }
+
+          particleContext.globalAlpha = 1;
+
+          const blur = (1 - focus) * (width < 700 ? 5 : 8);
+          const drawParticleLayer = () => {
+            context.drawImage(
+              particleLayer,
+              0,
+              0,
+              particleLayer.width,
+              particleLayer.height,
+              -blur,
+              -blur,
+              width + blur * 2,
+              height + blur * 2,
+            );
+          };
+
+          context.globalAlpha = 1;
+          context.filter = blur > 0.1 ? `blur(${blur}px)` : 'none';
+          drawParticleLayer();
+          context.filter = 'none';
+
+          if (blur > 0.1) {
+            const apertureX = width * 0.5;
+            const apertureY = height * 0.58;
+            const apertureWidth = width * (width < 700 ? 0.43 : 0.21);
+            const apertureHeight = height * (width < 700 ? 0.43 : 0.48);
+
+            for (let layer = 0; layer < 7; layer += 1) {
+              const scale = 1 - layer * 0.075;
+              context.save();
+              context.beginPath();
+              context.ellipse(
+                apertureX,
+                apertureY,
+                apertureWidth * scale,
+                apertureHeight * scale,
+                0,
+                0,
+                Math.PI * 2,
+              );
+              context.clip();
+              context.globalAlpha = 0.16;
+              drawParticleLayer();
+              context.restore();
+            }
+          }
+
+          context.globalAlpha = 1;
+          if (!reducedMotion) raf = requestAnimationFrame(render);
+        };
+
+        image.addEventListener('load', () => {
+          resize();
+          updateScroll();
+          if (reducedMotion) {
+            render(0);
+          } else {
+            raf = requestAnimationFrame(render);
+          }
+        });
+        image.src = source;
+
+        window.addEventListener('resize', resize, { passive: true });
+        window.addEventListener('scroll', updateScroll, { passive: true });
+        window.addEventListener('pointermove', (event) => {
+          pointer.x = event.clientX / Math.max(1, window.innerWidth) - 0.5;
+          pointer.y = event.clientY / Math.max(1, window.innerHeight) - 0.5;
+        }, { passive: true });
+        window.addEventListener('pagehide', () => cancelAnimationFrame(raf), { once: true });
+      }
+    </script>
+  </body>
+</html>

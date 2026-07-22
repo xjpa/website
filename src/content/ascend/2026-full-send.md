@@ -5,7 +5,7 @@ summary: lowercase = wrote this with energy
 tags:
   - Execution
   - Momentum
-  - Lifemaxx
+  - Ascend
 ---
 
 ## quarter-life pivot
@@ -126,7 +126,7 @@ while people critique you, you are already moving on to the next task.
 
 it's not that you become better than others, but just simply: you become way AHEAD.
 
-<img src="/images/lifemaxx/2026/full-send/full-send.jpg" alt="full send" />
+<img src="/images/ascend/2026/full-send/full-send.jpg" alt="full send" />
 
 ## dont think
 
@@ -166,7 +166,7 @@ get masters or phd. start a business. fail. do it again.
 
 congrats youre gaining trajectory, distance, and velocity. so when the opportunity comes, youre already airborne.
 
-## minimum viable lifemaxx
+## minimum viable ascension
 
 increase your input-output throughput for life. then aim your aggression.
 

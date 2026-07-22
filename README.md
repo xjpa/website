@@ -28,7 +28,7 @@ Deployment is handled by [`.github/workflows/deploy.yml`](./.github/workflows/de
 - Main site content: `src/content/site.ts`
 - Blog posts: `src/content/blog/*.md`
 - Projects: `src/content/projects/*.md`
-- Lifemaxx entries: `src/content/lifemaxx/*.md`
+- Ascend entries: `src/content/ascend/*.md`
 - Styling: `src/styles.css`
 
 ## Notes

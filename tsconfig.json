@@ -11,7 +11,7 @@
     "src/seo.ts",
     "src/posts/**",
     "src/projects/**",
-    "src/lifemaxx/**",
+    "src/ascend/**",
     "src/vite-env.d.ts",
     "scripts/**",
     "vite.config.ts",

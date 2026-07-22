@@ -1,11 +1,11 @@
-import type { LifemaxxEntry } from './types';
+import type { AscendEntry } from './types';
 
-const entry: LifemaxxEntry = {
+const entry: AscendEntry = {
   slug: 'full-send',
   title: 'full send',
   date: '2026-01-02',
   summary: 'lowercase = wrote this with energy',
-  tags: ['Execution', 'Momentum', 'Lifemaxx'],
+  tags: ['Execution', 'Momentum', 'Ascend'],
   content: `
     <h2>quarter-life pivot</h2>
     <p>around your 20s, you begin to see the matrix glitching.</p>
@@ -84,7 +84,7 @@ const entry: LifemaxxEntry = {
     <p>execution is my preparation, momentum is my advantage.</p>
     <p>while people critique you, you are already moving on to the next task.</p>
     <p>it's not that you become better than others, but just simply: you become way AHEAD.</p>
-    <img src="/images/lifemaxx/2026/full-send/full-send.jpg" alt="full send" />
+    <img src="/images/ascend/2026/full-send/full-send.jpg" alt="full send" />
     <h2>dont think</h2>
     <p>i am not here to pitch you productivity, i am here to declare an ethos: operator vs overthinker. it's a binary choice. thinking about a grey zone is how you lose, thats how you hesitate.</p>
     <p>1 second of hesitation scales to an eternity of saying "no".</p>
@@ -110,7 +110,7 @@ const entry: LifemaxxEntry = {
     <p>get masters or phd. start a business. fail. do it again.</p>
     <p>congrats youre gaining trajectory, distance, and velocity. so when the opportunity comes, youre already airborne.</p>
 
-    <h2>minimum viable lifemaxx</h2>
+    <h2>minimum viable ascension</h2>
     <p>increase your input-output throughput for life. then aim your aggression.</p>
     <p>for you are the postmodern odysseus. youre not a wanderer, nor a philosopher, but a tactician of experience.</p>
     <p>stay kinetic and high test.</p>

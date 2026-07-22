@@ -1,16 +1,16 @@
-import type { LifemaxxEntry } from './types';
+import type { AscendEntry } from './types';
 
-const entry: LifemaxxEntry = {
+const entry: AscendEntry = {
   slug: 'physique',
   title: 'getting jacked',
   date: '2026-03-05',
   summary: 'Locking in on a lean bulk, better training structure, and a year-end update with receipts.',
-  tags: ['Physique', 'Training', 'Lifemaxx'],
+  tags: ['Physique', 'Training', 'Ascend'],
   content: `
     <h2>march 5, 2026</h2>
     <section>
       <p>the following is a pic of me</p>
-      <img src="/images/lifemaxx/2026/physique/physique.jpeg" alt="mirror selfie of me" />
+      <img src="/images/ascend/2026/physique/physique.jpeg" alt="mirror selfie of me" />
       <p>i look meh, poverty abs.</p>
       <p>thats me barely working out, 2x a week max, but often its more like once a week. just looking "okayish" because i have a good diet and i move around a lot.</p>
       <p>often just 1 real workout every week, then the rest was just random cardio throughout the week to get to that physique in the pic above.</p>

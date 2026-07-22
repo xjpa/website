@@ -5,16 +5,16 @@ import TableOfContents from '../../components/TableOfContents.astro';
 import { buildToc, formatDate } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('lifemaxx');
+  const entries = await getCollection('ascend');
   return entries.map((entry) => ({ params: { slug: entry.slug } }));
 }
 
-const entries = await getCollection('lifemaxx');
+const entries = await getCollection('ascend');
 const { slug } = Astro.params;
 const entry = entries.find((item) => item.slug === slug);
 
 if (!entry) {
-  throw new Error(`Lifemaxx entry not found for slug: ${slug}`);
+  throw new Error(`Ascend entry not found for slug: ${slug}`);
 }
 
 const { Content, headings } = await entry.render();
@@ -24,10 +24,10 @@ const toc = buildToc(headings);
 <BaseLayout
   title={`${entry.data.title} | John Amata`}
   description={entry.data.summary}
-  canonicalPath={`/lifemaxx/${entry.slug}`}
+  canonicalPath={`/ascend/${entry.slug}`}
 >
   <article class="post-layout">
-    <a class="inline-link" href="/lifemaxx">← Back to lifemaxx</a>
+    <a class="inline-link" href="/ascend">← Back to ascend</a>
     <p class="post-date">{formatDate(entry.data.date)}</p>
     <h1>{entry.data.title}</h1>
     <p class="about-copy">{entry.data.summary}</p>
