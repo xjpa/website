@@ -25,4 +25,4 @@ my goofy ID
 
 ## Soon...
 
-The next step after my education at DLSU is to take, a 2nd or more masters. Part-time? Or Full-time at a different country? Who knows, but my father managed to finish 2 master degrees while working a demanding job in senior leadership in his 30s and later abroad in his 40s
+The next step after my education at DLSU is to take, a 2nd or more masters part-time while working a full time job. Or perhaps even full-time at a different country. My father managed to finish 2 master degrees while working a demanding job in senior leadership in his 30s and later abroad in his 40s
