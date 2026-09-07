@@ -33,6 +33,6 @@ Deployment is handled by [`.github/workflows/deploy.yml`](./.github/workflows/de
 
 ## Notes
 
-- Uses Astro content collections for long-form content.
-- Uses static output suitable for GitHub Pages.
-- Syntax-highlighted code blocks use Astro's built-in Shiki pipeline.
+- Uses Astro content collections for long-form content
+- Uses static output suitable for GitHub Pages
+- Syntax-highlighted code blocks use Astro's built-in Shiki pipeline
