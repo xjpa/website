@@ -3,6 +3,8 @@ import Header from '../components/Header.astro';
 import { site } from '../content/site';
 import '../themes.css';
 import '../styles.css';
+import '../styles/window-theme.css';
+import '../styles/inner-pages.css';
 
 type Props = {
   title?: string;
@@ -38,7 +40,8 @@ const canonicalUrl = canonicalPath === '/' ? `${site.url}/` : `${site.url}${cano
   <body>
     <div class="page-shell">
       <Header pathname={Astro.url.pathname} />
-      <main>
+      <main class="content-window">
+        <a class="page-window-close" href="/" aria-label="Close this window and return home">×</a>
         <slot />
       </main>
     </div>

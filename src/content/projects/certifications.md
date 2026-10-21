@@ -6,12 +6,10 @@ links: []
 
 ## Amazon certifications
 
+### AWS Solutions Architect Associate (AWS SAA-C03)
+
 ### AWS AI Practitioner
 
-### AWS Solutions Architect Associate
-
 ## Microsoft certifications
-
-### Azure AI Apps and Agents Developer Associate
 
 ### Microsoft Technology Associate - Databases
