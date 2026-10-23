@@ -15,6 +15,9 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf()
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="John Amata's corner of the internet. Systems, software, side quests, and notes on moving forward." />
     <link rel="icon" type="image/png" href="/eagle.png" />
@@ -34,7 +37,7 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf()
             <button class="window-close" aria-label="Close this panel">×</button>
             <span class="panel-label">01 / hello, internet</span>
             <h1>John<br />Amata<span class="star">✳</span></h1>
-            <p class="intro-line">Full stack, from systems<br />to revenue.</p>
+            <p class="intro-line">Full stack engineer, from math to systems.</p>
             <p>I like building things, figuring out how they work, and seeing how far I can take them.</p>
             <p class="small-note">Welcome to my little corner of the web.</p>
           </section>
@@ -50,7 +53,7 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf()
           <section class="frame">
             <button class="window-close" aria-label="Close this panel">×</button>
             <span class="panel-label">02 / currently exploring</span>
-            <p>Artificial intelligence and cloud infrastructure. Working as a software engineer, as well as working through a <a href="/projects/masters/">master's degree</a></p>
+            <p>I am into artificial intelligence and cloud infrastructure. I currently work as a software engineer, while also working through a <a href="/projects/masters/">master's degree</a></p>
           </section>
           <a class="frame envelope" href={`mailto:${site.email}`}>
             <svg viewBox="0 0 400 95" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L200 95 L400 0" /></svg>
@@ -61,7 +64,7 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf()
           <section class="frame projects-frame">
             <button class="window-close" aria-label="Close this panel">×</button>
             <span class="panel-label">03 / things i'm working on</span>
-            <h2>Side quests.</h2>
+            <h2>Skills.</h2>
             {projects.map(project => <p><a href={`/projects/${project.slug}/`}>{project.data.title}</a><br /><span>{project.data.summary}.</span></p>)}
             <a class="end-link" href="/archive/">The archive →</a>
           </section>
@@ -74,12 +77,12 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf()
             </div>
           </section>
           <nav class="frame link-strip" aria-label="Primary navigation">
-            <a href="/blog/">blog</a><a href="/archive/">archive</a><a href="/ascend/">ascend</a><a href={site.github}>github ↗</a>
+            <a href="/blog/">blog</a><a href="/archive/">archive</a><a href="/ascend/">ascend</a><a href={site.github}>github</a>
           </nav>
           <section class="frame">
             <button class="window-close" aria-label="Close this panel">×</button>
             <span class="panel-label">04 / notes from the field</span>
-            <h2>On the blog.</h2>
+            <h2>Recent blog posts.</h2>
             {posts.slice(0, 3).map(post => <p><a href={`/blog/${post.slug}/`}>{post.data.title} →</a><br /><span>{post.data.summary}</span></p>)}
             <a class="end-link" href="/blog/">All writing →</a>
           </section>
@@ -87,18 +90,20 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf()
         <div class="column">
           <section class="frame interests-frame">
             <button class="window-close" aria-label="Close this panel">×</button>
-            <span class="panel-label">05 / a few recurring interests</span>
-            <h2>Connecting<br />the dots.</h2>
-            <ul class="interest-list"><li>Systems engineering</li><li>Web and AI operations</li><li>Business & startups</li><li>Discipline & performance</li><li>Martial arts</li></ul>
+            <span class="panel-label">05 / my few recurring interests</span>
+            <h2>Exploring<br />the dots</h2>
+            <ul class="interest-list"><li>Systems engineering</li><li>Artificial Intelligence</li><li>Business & startups</li><li>Discipline & performance</li><li>Martial arts</li></ul>
             <div class="dot-field" aria-hidden="true">{Array.from({length: 60}, (_, i) => <span class:list={{ filled: (i * 7) % 11 < 5 }}>·</span>)}</div>
           </section>
           <section class="frame">
             <button class="window-close" aria-label="Close this panel">×</button>
             <span class="panel-label">06 / worth a visit</span>
-            <h2>Recommended links.</h2>
+            <h2>Internet links I like.</h2>
             <ul class="entry-list">
               <li><a href="https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/">How to be more ambitious ↗</a></li>
               <li><a href="https://www.nathalielawhead.com/candybox/ui-design-is-fun">UI design is fun ↗</a></li>
+              <li><a href="https://sive.rs/4">Cross the world four times ↗</a></li>
+              <li><a href="https://www.mathacademy.com/">Math Academy ↗</a></li>
             </ul>
           </section>
         </div>

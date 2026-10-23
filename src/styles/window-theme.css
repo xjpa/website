@@ -1,8 +1,13 @@
 /* Shared palette and window outlines across the index and reading pages. */
 :root {
+  --body-font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  --heading-font: 'Open Sans', sans-serif;
   --paper: #f2eeee;
   --ink: #302e2d;
   --link: #5c86c4;
   --window-outline: 0 0 0 5px var(--paper), 0 0 0 6px var(--ink),
     0 0 0 11px var(--paper), 0 0 0 12px var(--ink);
 }
+
+body { font-family: var(--body-font); }
+h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); }
